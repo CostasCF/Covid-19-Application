@@ -1,11 +1,16 @@
 #include <iostream>
 using namespace std;
 
-int main() {
-    cout << "Hello world" << endl;
-    greetings();
-} 
-
 void greetings() {
     cout << "I have discovered github" << endl;
 }
+
+void malakies() {
+    cout << "hello world221222231432";
+}
+
+int main() {
+    cout << "Hello world" << endl;
+    malakies();
+    greetings();
+} 

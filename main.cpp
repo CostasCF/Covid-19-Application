@@ -1,16 +1,21 @@
 #include <iostream>
 using namespace std;
 
-void greetings() {
-    cout << "I have discovered github" << endl;
-}
+//bool  POSSIBLE_COVID_19_INFECTION (User_Trajectory, Day, Catalog){
+ //if (){
 
-void malakies() {
-    cout << "hello world221222231432";
-}
+ //}
 
-int main() {
-    cout << "Hello world" << endl;
-    malakies();
-    greetings();
-} 
+
+
+
+
+//}
+
+int main(){
+    ArrayList^ Catalog = gcnew ArrayList; //Initialize a new ArrayList
+    int width, lngth, area, peri;
+    Catalog->Add(1);
+    cout<<Catalog;
+
+}

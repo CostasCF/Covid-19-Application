@@ -6,7 +6,11 @@ void llInit(listPtr* head) {
     *head = nullptr;
 };
 
-int llInsertStart(listPtr* head, int arrayPtr) {
+User llData(listPtr ptr) {
+    return ptr->data;
+}
+
+int llInsertStart(listPtr* head, User user) {
     // Δείκτης σε νέο κόμβο
     listPtr newNode;
 
@@ -17,15 +21,15 @@ int llInsertStart(listPtr* head, int arrayPtr) {
         cout << "Memory couldn't be allocated" << endl;
         return false;
     }
-    // Προσθήκη του arrayPtr στο data
-    newNode->data = arrayPtr;
+    // Προσθήκη του user στο data
+    newNode->data = user;
 
     newNode->next = *head; // Το next του νέου κόμβου δείχνει εκεί όπου έδειχνε το head
     *head = newNode; // Και το head τώρα δείχνει στο νέο κόμβο
     return true;
 }
 
-int llInsertEnd(listPtr* head, int arrayPtr) {
+int llInsertEnd(listPtr* head, User user) {
     listPtr newNode;
 
     newNode = (listNode*)malloc(sizeof(listNode));
@@ -33,7 +37,7 @@ int llInsertEnd(listPtr* head, int arrayPtr) {
         cout << "Memory couldn't be allocated" << endl;
         return false;
     }
-    newNode->data = arrayPtr;
+    newNode->data = user;
 
     newNode->next = nullptr;
     if (*head == nullptr) {
@@ -48,7 +52,7 @@ int llInsertEnd(listPtr* head, int arrayPtr) {
     return true;
 }
 
-int llInsertAfter(listPtr p, User arrayPtr[]) {
+int llInsertAfter(listPtr p, User user) {
     listPtr newNode;
 
     // Δέσμευση μνήμης για νέο κόμβο
@@ -58,15 +62,15 @@ int llInsertAfter(listPtr p, User arrayPtr[]) {
         cout << "Memory couldn't be allocated" << endl;
         return false;
     }
-    // Προσθήκη του arrayPtr στο data
-    newNode->data = arrayPtr;
+    // Προσθήκη του user στο data
+    newNode->data = user;
 
     newNode->next = p->next; // Το next του νέου κόμβου δείχνει εκεί όπου έδειχνε το p->next
     p->next = newNode; // Και το p->next τώρα δείχνει στο νέο κόμβο
     return true;
 }
 
-int llDeleteStart(listPtr* head, User* arrayPtr[]) {
+int llDeleteStart(listPtr* head, User* user) {
     listPtr current;
 
     if (*head==nullptr) {
@@ -75,14 +79,14 @@ int llDeleteStart(listPtr* head, User* arrayPtr[]) {
     }
 
     current = *head;
-    *arrayPtr = current->data;
+    *user = current->data;
 
     *head = (*head)->next;
     free(current);
     return true;
 }
 
-int llDeleteAfter(listPtr prev, User* arrayPtr[]) {
+int llDeleteAfter(listPtr prev, User* user) {
     listPtr current;
 
     if (prev->next==nullptr) {
@@ -91,21 +95,19 @@ int llDeleteAfter(listPtr prev, User* arrayPtr[]) {
     }
 
     current = prev->next;
-    *arrayPtr = current->data;
+    *user = current->data;
 
     prev->next = current->next;
     free(current);
     return true;
 }
 
-void llDisplay(listPtr head, int userssNumber) {
+void llDisplay(listPtr head) {
     listPtr current;
 
     current = head;
     while (current != nullptr) {
-        for (int i=0; i < usersNumber; i++) {
-
-        }
+        (current->data).displayUserData();
         current = current->next;
     }
 }

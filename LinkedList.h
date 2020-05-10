@@ -1,7 +1,9 @@
 #include "User.h"
 
+const int usersNumber = 30;
+
 struct node {
-    User data;
+    int data;
     struct node* next;
 };
 
@@ -10,11 +12,10 @@ typedef struct node* listPtr; // Συνώνυμο του δείκτη κόμβο
 
 // Λειτουργίες της λίστας
 void llInit(listPtr* head);
-int llEmpty(listPtr head);
-User llData(listPtr p);
-int llInsertStart(listPtr* head, User user);
-int llInsertAfter(listPtr p, User user);
-int llDeleteStart(listPtr* head, User* user);
-int llDeleteAfter(listPtr prev, User* user);
-void llDisplay(listPtr head);
+int llInsertStart(listPtr* head, int arrayPtr);
+int llInsertEnd(listPtr* head, int arrayPtr);
+int llInsertAfter(listPtr p, int arrayPtr);
+int llDeleteStart(listPtr* head, int* arrayPtr);
+int llDeleteAfter(listPtr prev, int* arrayPtr);
+void llDisplay(listPtr head, int usersNumber);
 void llDestroy(listPtr* head);

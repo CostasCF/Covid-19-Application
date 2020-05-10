@@ -1,6 +1,7 @@
 #ifndef USER_H
 #define USER_H
 #include <iostream>
+using namespace std;
 
 struct User {
     // Ταυτότητα χρήστη
@@ -20,11 +21,12 @@ struct User {
         // Τυχαία επιλογή αν είναι μολυσμένος ή όχι
         int random = rand() % 5;
         // 20% πιθανότητα να είναι μολυσμένος
-        if (random == 0) {
-            infected = true;
-        } else {
-            infected = false;
-        }
+        infected = random == 0;
+    }
+
+    void displayUserData() const {
+        cout << "User " << id << ":" << endl << "Coordinates: x = " << x << " y = " << y << ". Time ";
+        cout << hours << ":" << minutes << ":" << seconds << boolalpha << " Infection status: " << infected << endl;
     }
 };
 

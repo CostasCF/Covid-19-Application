@@ -9,7 +9,7 @@ using namespace std;
 int main() {
 
     // srand ώστε να μην παράγονται οι ίδιοι αριθμοί κάθε φορά που τρέχει το πρόγραμμα
-    srand(time(NULL));
+    srand(time(nullptr));
     // Παραγωγή ενός τυχαίου αριθμού από 50 έως 100 για τις διαστάσεις του πλέγματος
     const int D = rand() % 50 + 50;
     // Δημιουργεία του πλέγματος
@@ -27,12 +27,19 @@ int main() {
         // Ορισμός κατάστασης μόλυνσης
         Users[i].setInfectionStatus();
     }
-    
+
+    // Δημιουργεία νέας λίστας (με βάση το LinkedList.h και LinkedList.cpp που δημιουργήθηκαν προηγουμένως)
+    listPtr allUsers;
     // Αρχικοποίηση συνδεδεμένης λίστας
-    listPtr head;
+    llInit(&allUsers); // Περνάμε τη διεύθυνση του allUsers επειδή η llInit ζητάει δείκτη
+
+    // Δημιουργεία ενός πίνακα 7 θέσεων (για καθεμία από τις 7 μέρες) με δείκτες,
+    // όπου σε κάθε θέση αποθηκεύεται ο δείκτης που δείχνει στον πρώτο κόμβο
+    // αμέσως μετά την αλλαγή της ημέρας
+    listPtr dayPtr[7];
 
     // Επανάληψη για 7 ημέρες
-    //for (int day = 1; day <= 7; day++) {
+    for (int day = 1; day <= 1; day++) {
 
         int seconds = -30; // -30 επειδή πριν αποθηκευτούν τα δευτερόλεπτα για πρώτη φορά αυξάνονται κατά 30
         int minutes = 0;
@@ -67,16 +74,16 @@ int main() {
                 Users[j].minutes = minutes;
                 Users[j].hours = hours;
             }
+            Users* arrayPtr;
+            llInsertEnd(&allUsers, *Users);
 
         }
 
         cout << "Dimension: " << D << endl;
-
-        for (User user : Users) {
-            cout << "User " << user.id << ":" << endl << "Coordinates: x = " << user.x << " y = " << user.y << ". Time ";
-            cout << user.hours << ":" << user.minutes << ":" << user.seconds << boolalpha << " Infection status: " << user.infected << endl;
+        for (int i = 0; i < UsersNumber; i++) {
+            llDisplay(allUsers, UsersNumber);
         }
         
-    //}
+    }
 }
 

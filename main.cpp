@@ -1,127 +1,82 @@
 #include <iostream>
+#include <ctime>
+#include "User.h"
+#include "LinkedList.h"
+
+
 using namespace std;
-class Waypoint
-{
-    public:
-        float x;
-        float y;
-        float speed; //Ταχύτητα(σε χιλιόμτερα αν ώρα) του χρήστη μέχρι το επόμενο waypoint (αν υπάρχει)
-        int waitTime; //Χρόνος παραμονής(σε λεπτά) στο waypoint
-        int areaSize; //Μέγεθος(σε χιλιόμετρα) της πλευράς της τετράγωνης περιοχής που κινείται ο χρήστης
-        int time[3]; //
 
-        Waypoint(int areaSize, int time[3])
-        {
-            srand((unsigned) time(0));
-            this->areaSize = areaSize;
-            x = (rand() % areaSize-1) + 0;
-            y = (rand() % areaSize-1) + 0;
-            speed = (rand() % 6) + 3;
-            waitTime = (rand() % 180) + 1;
-            this->time = time;
+int main() {
+
+    // srand ώστε να μην παράγονται οι ίδιοι αριθμοί κάθε φορά που τρέχει το πρόγραμμα
+    srand(time(NULL));
+    // Παραγωγή ενός τυχαίου αριθμού από 50 έως 100 για τις διαστάσεις του πλέγματος
+    const int D = rand() % 50 + 50;
+    // Δημιουργεία του πλέγματος
+    int grid[D][D];
+
+    // Δημιουργεία χρηστών
+    const int UsersNumber = 30;
+    // Πίνακας των χρηστών
+    User Users[UsersNumber];
+    
+    // Ορισμός ταυτότητας και κατάστασης μόλυνσης κάθε χρήστη
+    for (int i = 0; i < UsersNumber; i++) {
+        // Ορισμός ταυτότητας για κάθε χρήστη
+        Users[i].id = i + 1;
+        // Ορισμός κατάστασης μόλυνσης
+        Users[i].setInfectionStatus();
+    }
+    
+    // Αρχικοποίηση συνδεδεμένης λίστας
+    listPtr head;
+
+    // Επανάληψη για 7 ημέρες
+    //for (int day = 1; day <= 7; day++) {
+
+        int seconds = -30; // -30 επειδή πριν αποθηκευτούν τα δευτερόλεπτα για πρώτη φορά αυξάνονται κατά 30
+        int minutes = 0;
+        int hours = 0;
+
+        // Επανάληψη που κρατάει όσο τα δευτερόλεπτα μίας ημέρας
+        for (int i = 0; i < 86400; i += 30) {
+            
+            // Μετατροπή δευτερολέπτων σε λεπτά
+            if (seconds == 60) {
+                minutes++;
+                seconds = 0;
+            }
+
+            // Μετατροπή λεπτών σε ώρες
+            if (minutes == 60 ) {
+                hours++;
+                minutes = 0;
+            }
+
+            seconds += 30;
+            
+            // Ορισμός τυχαίων συντεταγμένων για κάθε χρήστη σε κάθε χρονική στιγμή
+            for (int i = 0; i < UsersNumber; i++) {
+                // Συντεταγμένες
+                Users[i].x = rand() % D;
+                Users[i].y = rand() % D;
+            }
+
+            for (int j = 0; j < UsersNumber; j++) {
+                Users[j].seconds = seconds;
+                Users[j].minutes = minutes;
+                Users[j].hours = hours;
+            }
+
         }
-		
-			/Αρχικοποίηση λίστας/
-void List_Initialize(List_Pointer* head) {
-    head = NULL;
-};
 
-/Έλεγχος αν η λίστα είναι κενή/
-int List_Empty(List_Pointer head) const {
-    return head == NULL;
-};
+        cout << "Dimension: " << D << endl;
 
-/Η λίστα επιστρέφει το περιεχόμενο του κόμβου όπου δείχνει ο δείκτης p/
-int List_Data(List_Pointer p) const {
-    return p->data;
-};
-
-/Εισαγωγή κόμβου στην αρχή/
-int List_Insert_Start(List_Pointer head, User_Trajectory(int in_Time_Record, int in_x, int in_y)) {
-    List_Pointer newnode;
-    newnode = (List_Node*)malloc(sizeof(List_Node));
-    if (!newnode) {
-        cout << ("Αδυναμία δέσμευσης μνήμης");
-        return false;
-    }
-    newnode->data = x;
-    newnode->next = *head;
-    head = newnode;
-    return true;
-};
-
-/Εισαγωγή κόμβου μετά από κάποιον άλλον/
-int List_Insert_After(List_Pointer p, int k) {
-    List_Pointer newnode;
-    newnode = (List_Node)malloc(sizeof(List_Node));
-    if (!newnode) {
-        cout << ("Αδυναμία δέσμευσης μνήμης");
-        return false;
-    };
-    newnode->data = x;
-    newnode->next = p->next;
-    p->next = newnode;
-    return true;
+        for (User user : Users) {
+            cout << "User " << user.id << ":" << endl << "Coordinates: x = " << user.x << " y = " << user.y << ". Time ";
+            cout << user.hours << ":" << user.minutes << ":" << user.seconds << boolalpha << " Infection status: " << user.infected << endl;
+        }
+        
+    //}
 }
 
-/Διαγραφή του πρώτου κόμβου/
-int List_Delete_Start(List_Pointer* head, int k) {
-    List_Pointer current;
-    if (*head == NULL) {
-        return false;
-    };
-    current = *head;
-    k = current->data;
-    (head) = (head)->next;
-    free(current);
-    return true;
-};
-
-/Διαγραφή ενδιάμεσου κόμβου*/
-int List_Delete_After(List_Pointer prev, int k) {
-    List_Pointer current;
-    if (prev->next == NULL) {
-        return false;
-    };
-    current = prev->next;
-    k = current->data;
-    prev->next = current->next;
-    free(current);
-    return false;
-};
-
-/Καταστροφή λίστας/
-void List_Destroy(List_Pointer head) {
-    List_Pointer ptr;
-    while (*head != NULL) {
-        ptr = *head;
-        head = (head)->next;
-        free(ptr);
-    }
-}
-struct node {
-            int data;
-            struct node* next;
-        };
-typedef struct node List_Node;
-        typedef struct node* List_Pointer;
-};
-
-bool  POSSIBLE_COVID_19_INFECTION (User_Trajectory, Day, Catalog){
-	//Under Construction
- }
-void FIND_CROWDED_PLACES(Day, Time Interval, Square Region of Interest, Minimum Stay Duration){
-	//Under Construction 
- }
-
-void  REPAIR (Day, User Trajectory){}
-	//Under Construction
-
-}
-
-void  SUMMARIZE_TRAJECTORY(DAY, DAYS BEFORE, USER TRAJECTORY){
-	//Under Construction
-}
-int main(){
-
-}

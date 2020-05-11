@@ -4,7 +4,7 @@ using namespace std;
 
 void llInit(listPtr* head) {
     *head = nullptr;
-};
+}
 
 User llData(listPtr ptr) {
     return ptr->data;

@@ -25,7 +25,7 @@ struct User {
     }
 
     void displayUserData() const {
-        cout << "User " << id << ":" << endl << "Coordinates: x = " << x << " y = " << y << ". Time ";
+        cout << "User " << id <<  " -> Coordinates: x = " << x << " y = " << y << ". Time ";
         cout << hours << ":" << minutes << ":" << seconds << boolalpha << " Infection status: " << infected << endl;
     }
 };

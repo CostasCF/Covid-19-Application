@@ -3,7 +3,13 @@
 #include "User.h"
 #include "LinkedList.h"
 using namespace std;
-void repair();
+int repair(int day, int userNum, listPtr* head){
+    bool flag;
+    listPtr newNode;
+    while(flag){
+        if  ( )
+    }
+}
 
 bool userWillMove() {
     // 33.3% πιθανότητα να κουνηθεί ο χρήστης
@@ -16,6 +22,8 @@ bool gpsWorked() {
     int random = rand() % 10;
     return random == 1;
 }
+
+
 
 int main() {
 
@@ -31,7 +39,7 @@ int main() {
     // Ορισμός της απόστασης μεταξύ κάθε στοιχείου του πλέγματος
 
     // Δημιουργεία χρηστών
-    const int UsersNumber = 3;
+    const int UsersNumber = 2;
 
     // Ορισμός ημερών
     const int daysNum = 2;
@@ -107,7 +115,10 @@ int main() {
                 seconds += 30;
 
             }
+            //calling repair()
+            repair(day, userNum, &Users[day][userNum]);
         }
+
     }
 
     for (int day = 0; day < daysNum; day++) {

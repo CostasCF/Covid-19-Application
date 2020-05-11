@@ -28,6 +28,7 @@ struct User {
         cout << "User " << id <<  " -> Coordinates: x = " << x << " y = " << y << ". Time ";
         cout << hours << ":" << minutes << ":" << seconds << boolalpha << " Infection status: " << infected << endl;
     }
+
 };
 
 #endif

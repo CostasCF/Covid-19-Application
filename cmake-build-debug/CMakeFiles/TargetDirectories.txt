@@ -1,0 +1,3 @@
+C:/Users/kkalo/OneDrive/Documents/GitHub/Covid-19-Application/cmake-build-debug/CMakeFiles/Covid_19_Application.dir
+C:/Users/kkalo/OneDrive/Documents/GitHub/Covid-19-Application/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/kkalo/OneDrive/Documents/GitHub/Covid-19-Application/cmake-build-debug/CMakeFiles/rebuild_cache.dir

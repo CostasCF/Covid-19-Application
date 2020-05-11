@@ -6,11 +6,13 @@ using namespace std;
 void repair();
 
 bool userWillMove() {
+    // 33.3% πιθανότητα να κουνηθεί ο χρήστης
     int random = rand() % 3;
     return random == 1;
 }
 
 bool gpsWorked() {
+    // 10% πιθανότητα να μη δουλέψει το gps και να χαθεί μία χρονική στιγμή
     int random = rand() % 10;
     return random == 1;
 }
@@ -26,46 +28,45 @@ int main() {
     // Δημιουργεία του πλέγματος
     int grid[D][D];
 
+    // Ορισμός της απόστασης μεταξύ κάθε στοιχείου του πλέγματος
+
     // Δημιουργεία χρηστών
-    const int UsersNumber = 2;
+    const int UsersNumber = 3;
 
     // Ορισμός ημερών
     const int daysNum = 2;
 
-    // Πίνακας των χρηστών
+    // Δήλωση ενός δισδιάστατου πίνακα του τύπου listPtr που κάθε γραμμή αντιστοιχεί σε μία μέρα
+    // και περιέχει μία απλά συνδεδεμένη λίστα για την τροχιά του κάθε χρήστη εκείνη τη μέρα
     listPtr Users[daysNum][UsersNumber];
 
     for (int day = 0; day < daysNum; day++) {
         for (int userNum = 0; userNum < UsersNumber; userNum++) {
-            // Δημιουργεία νέας λίστας (με βάση το LinkedList.h και LinkedList.cpp που δημιουργήθηκαν προηγουμένως)
-            //listPtr userTrajectory;
-            // Αρχικοποίηση συνδεδεμένης λίστας
-            llInit(&Users[day][userNum]); // Περνάμε τη διεύθυνση του userTrajectory επειδή η llInit ζητάει δείκτη
 
-            //Users[day][userNum] = userTrajectory;
+            // Αρχικοποίηση όλων των συνδεδεμένων λίστών με την τιμή null
+            llInit(&Users[day][userNum]);
+
         }
     }
-    // Δημιουργεία ενός πίνακα 7 θέσεων (για καθεμία από τις 7 μέρες) με δείκτες,
-    // όπου σε κάθε θέση αποθηκεύεται ο δείκτης που δείχνει στον πρώτο κόμβο
-    // αμέσως μετά την αλλαγή της ημέρας
-    //listPtr dayPtr[daysNum][UsersNumber];
 
-    // Επανάληψη για 7 ημέρες
+    // Επανάληψη για τις μέρες
     for (int day = 0; day < daysNum; day++) {
-        cout << endl << "ITS A NEW DAWN ITS A NEW DAY ITS A NEW LIFE FOOOOOOOR MEEEE" << endl << endl;
+
         for (int userNum = 0; userNum < UsersNumber; userNum++) {
 
+            // Χρήση μεταβλητών για δευτερόλεπτα, λεπτά και ώρες, ώστε ο χρόνος να
+            // εμφανίζεται με πιο όμορφο τρόπο
             int seconds = 0;
             int minutes = 0;
             int hours = 0;
 
-            // Δημηουργία αντικειμένου User
+            // Δημιουργία αντικειμένου User
             User user{};
 
             // Ορισμός ταυτότητας και κατάστασης μόλυνσης κάθε χρήστη
-            // Ορισμός ταυτότητας του χρήστη
+            // Ταυτότητα
             user.id = userNum + 1;
-            // Ορισμός κατάστασης μόλυνσης
+            // Κατάστασης μόλυνσης
             user.setInfectionStatus();
 
             // Επανάληψη που κρατάει όσο τα δευτερόλεπτα μίας ημέρας
@@ -83,11 +84,12 @@ int main() {
                     minutes = 0;
                 }
 
-                // Ορισμός τυχαίων συντεταγμένων για κάθε χρήστη σε κάθε χρονική στιγμή
+                // Ορισμός τυχαίων συντεταγμένων του χρήστη
                 // Συντεταγμένες
-                if (!gpsWorked()) {
+                if (!gpsWorked()) { // H gpsWorked επιστρέφει true αν το gps δούλεψε, αλλιώς false
 
-                    if (userWillMove()) {
+                    if (userWillMove()) {   // H UserWillMove επιλέγει τυχαία αν θα κινηθεί
+                                            // ο χρήστης ή αν θα παραμείνει στάσιμος
                         user.x = rand() % D;
                         user.y = rand() % D;
                     }
@@ -96,20 +98,16 @@ int main() {
                     user.minutes = minutes;
                     user.hours = hours;
 
+                    // Εισαγωγή στη λίστα του συγκεκριμένου χρήστη της συγκεκριμένης μέρας
+                    // της πληροφορίας περί απόστασης, χρόνου, id και κατάστασης μόλυνσης
                     llInsertEnd(&Users[day][userNum], user);
 
                 }
+
                 seconds += 30;
+
             }
-
         }
-
-        cout << "Dimension: " << D << endl;
-
-        //for (int i = 0; i < UsersNumber; i++) {
-        //    dayPtr[day][i] = Users[i];
-        //}
-
     }
 
     for (int day = 0; day < daysNum; day++) {
@@ -119,9 +117,4 @@ int main() {
             llDisplay(Users[day][userNum]);
         }
     }
-
-    cout << endl << " NEW TEXT " << endl << endl;
-    //for (int i = 0; i < UsersNumber; i++) {
-     //   llDisplay(dayPtr[0][i]);
-    //}
 }

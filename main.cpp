@@ -29,39 +29,42 @@ int main() {
     // Δημιουργεία χρηστών
     const int UsersNumber = 2;
 
-    // Πίνακας των χρηστών
-    listPtr Users[UsersNumber];
-
-    for (int userId = 0; userId < UsersNumber; userId++) {
-        // Δημιουργεία νέας λίστας (με βάση το LinkedList.h και LinkedList.cpp που δημιουργήθηκαν προηγουμένως)
-        listPtr userTrajectory;
-        // Αρχικοποίηση συνδεδεμένης λίστας
-        llInit(&userTrajectory); // Περνάμε τη διεύθυνση του userTrajectory επειδή η llInit ζητάει δείκτη
-
-        Users[userId] = userTrajectory;
-    }
-
+    // Ορισμός ημερών
     const int daysNum = 2;
+
+    // Πίνακας των χρηστών
+    listPtr Users[daysNum][UsersNumber];
+
+    for (int day = 0; day < daysNum; day++) {
+        for (int userNum = 0; userNum < UsersNumber; userNum++) {
+            // Δημιουργεία νέας λίστας (με βάση το LinkedList.h και LinkedList.cpp που δημιουργήθηκαν προηγουμένως)
+            //listPtr userTrajectory;
+            // Αρχικοποίηση συνδεδεμένης λίστας
+            llInit(&Users[day][userNum]); // Περνάμε τη διεύθυνση του userTrajectory επειδή η llInit ζητάει δείκτη
+
+            //Users[day][userNum] = userTrajectory;
+        }
+    }
     // Δημιουργεία ενός πίνακα 7 θέσεων (για καθεμία από τις 7 μέρες) με δείκτες,
     // όπου σε κάθε θέση αποθηκεύεται ο δείκτης που δείχνει στον πρώτο κόμβο
     // αμέσως μετά την αλλαγή της ημέρας
-    listPtr dayPtr[daysNum][UsersNumber];
+    //listPtr dayPtr[daysNum][UsersNumber];
 
     // Επανάληψη για 7 ημέρες
     for (int day = 0; day < daysNum; day++) {
         cout << endl << "ITS A NEW DAWN ITS A NEW DAY ITS A NEW LIFE FOOOOOOOR MEEEE" << endl << endl;
-        for (int userId = 0; userId < UsersNumber; userId++) {
+        for (int userNum = 0; userNum < UsersNumber; userNum++) {
 
             int seconds = 0;
             int minutes = 0;
             int hours = 0;
 
             // Δημηουργία αντικειμένου User
-            User user;
+            User user{};
 
             // Ορισμός ταυτότητας και κατάστασης μόλυνσης κάθε χρήστη
             // Ορισμός ταυτότητας του χρήστη
-            user.id = userId + 1;
+            user.id = userNum + 1;
             // Ορισμός κατάστασης μόλυνσης
             user.setInfectionStatus();
 
@@ -93,7 +96,7 @@ int main() {
                     user.minutes = minutes;
                     user.hours = hours;
 
-                    llInsertEnd(&Users[userId], user);
+                    llInsertEnd(&Users[day][userNum], user);
 
                 }
                 seconds += 30;
@@ -103,15 +106,20 @@ int main() {
 
         cout << "Dimension: " << D << endl;
 
-        for (listPtr u : Users) {
-            llDisplay(u);
-        }
-
-        for (int i = 0; i < UsersNumber; i++) {
-            dayPtr[day][i] = Users[i];
-        }
+        //for (int i = 0; i < UsersNumber; i++) {
+        //    dayPtr[day][i] = Users[i];
+        //}
 
     }
+
+    for (int day = 0; day < daysNum; day++) {
+        cout << endl << "DAY " << day+1 << endl << endl;
+        for (int userNum=0; userNum < UsersNumber; userNum++) {
+            cout << endl << "USER " << userNum+1 << endl << endl;
+            llDisplay(Users[day][userNum]);
+        }
+    }
+
     cout << endl << " NEW TEXT " << endl << endl;
     //for (int i = 0; i < UsersNumber; i++) {
      //   llDisplay(dayPtr[0][i]);

@@ -3,7 +3,7 @@
 #include "User.h"
 #include "LinkedList.h"
 using namespace std;
-int repair(int day, int userNum, listPtr* head){
+bool repair(int day, listPtr* head)  {
     bool flag;
     listPtr newNode;
     while(flag){
@@ -116,7 +116,7 @@ int main() {
 
             }
             //calling repair()
-            repair(day, userNum, &Users[day][userNum]);
+            repair(Users[day][&userNum]);
         }
 
     }

@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/kkalo/OneDrive/Documents/GitHub/Covid-19-Application/LinkedList.h
+User.h
+C:/Users/kkalo/OneDrive/Documents/GitHub/Covid-19-Application/User.h
+
+C:/Users/kkalo/OneDrive/Documents/GitHub/Covid-19-Application/User.h
+iostream
+-
+
+C:/Users/kkalo/OneDrive/Documents/GitHub/Covid-19-Application/main.cpp
+iostream
+-
+ctime
+-
+User.h
+C:/Users/kkalo/OneDrive/Documents/GitHub/Covid-19-Application/User.h
+LinkedList.h
+C:/Users/kkalo/OneDrive/Documents/GitHub/Covid-19-Application/LinkedList.h
+

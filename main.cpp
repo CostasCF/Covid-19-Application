@@ -6,13 +6,13 @@
 #include "LinkedList.h"
 
 using namespace std;
-
-
-bool possibleCOVID_19Infection();
-int findCrowdedPlaces();
-void repair();
-void summarizeTrajectory();
-
+bool repair(int day, listPtr* head)  {
+    bool flag;
+    listPtr newNode;
+    while(flag){
+        if  ( )
+    }
+}
 
 bool userWillMove() {
     // 33.3% πιθανότητα να κουνηθεί ο χρήστης
@@ -38,6 +38,8 @@ int getRandomSpeed() {
     return rand() % 3 + 3; // Χιλιόμετρα την ώρα
 }
 
+
+
 int main() {
 
     // srand ώστε να μην παράγονται οι ίδιοι αριθμοί κάθε φορά που τρέχει το πρόγραμμα
@@ -53,7 +55,7 @@ int main() {
     const int gridDistance = 50;
 
     // Δημιουργεία χρηστών
-    const int UsersNumber = 3;
+    const int UsersNumber = 2;
 
     // Ορισμός ημερών
     const int daysNum = 2;
@@ -259,6 +261,8 @@ int main() {
                 seconds += 30;
 
             }
+            //calling repair()
+            repair(Users[day][&userNum]);
         }
 
     }

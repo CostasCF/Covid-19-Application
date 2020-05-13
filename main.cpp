@@ -42,13 +42,13 @@ bool moveUser(int specifier, int &x, int &y, int desiredX, int desiredY, double 
 
             if (x < desiredX) {
                 meterCounterX += userSpeedM_30sec;
-                if (meterCounterX > gridDistance) {
+                while (meterCounterX >= gridDistance) {
                     x += 1;
                     meterCounterX -= gridDistance;
                 }
             } else if (y < desiredY) {
                 meterCounterY += userSpeedM_30sec;
-                if (meterCounterY > gridDistance) {
+                while (meterCounterY >= gridDistance) {
                     y += 1;
                     meterCounterY -= gridDistance;
                 }
@@ -61,13 +61,13 @@ bool moveUser(int specifier, int &x, int &y, int desiredX, int desiredY, double 
 
             if (x < desiredX) {
                 meterCounterX += userSpeedM_30sec;
-                if (meterCounterX > gridDistance) {
+                while (meterCounterX >= gridDistance) {
                     x += 1;
                     meterCounterX -= gridDistance;
                 }
             } else if (y > desiredY) {
                 meterCounterY += userSpeedM_30sec;
-                if (meterCounterY > gridDistance) {
+                while (meterCounterY >= gridDistance) {
                     y -= 1;
                     meterCounterY -= gridDistance;
                 }
@@ -79,13 +79,13 @@ bool moveUser(int specifier, int &x, int &y, int desiredX, int desiredY, double 
 
             if (x > desiredX) {
                 meterCounterX += userSpeedM_30sec;
-                if (meterCounterX > gridDistance) {
+                while (meterCounterX >= gridDistance) {
                     x -= 1;
                     meterCounterX -= gridDistance;
                 }
             } else if (y < desiredY) {
                 meterCounterY += userSpeedM_30sec;
-                if (meterCounterY > gridDistance) {
+                while (meterCounterY >= gridDistance) {
                     y += 1;
                     meterCounterY -= gridDistance;
                 }
@@ -98,13 +98,13 @@ bool moveUser(int specifier, int &x, int &y, int desiredX, int desiredY, double 
 
             if (x > desiredX) {
                 meterCounterX += userSpeedM_30sec;
-                if (meterCounterX > gridDistance) {
+                while (meterCounterX >= gridDistance) {
                     x -= 1;
                     meterCounterX -= gridDistance;
                 }
             } else if (y > desiredY) {
                 meterCounterY += userSpeedM_30sec;
-                if (meterCounterY > gridDistance) {
+                while (meterCounterY >= gridDistance) {
                     y -= 1;
                     meterCounterY -= gridDistance;
                 }
@@ -133,9 +133,9 @@ int main() {
     int grid[D][D];
 
     // Ορισμός της απόστασης μεταξύ κάθε στοιχείου του πλέγματος σε μέτρα
-    const int gridDistance = 40;
+    const int gridDistance = 30;
 
-    // Δημιουργεία χρηστών
+    // Ορισμός χρηστών
     const int UsersNumber = 2;
 
     // Ορισμός ημερών
@@ -273,7 +273,6 @@ int main() {
 
     }
 
-    cout << endl << endl << endl;
     for (int day = 0; day < daysNum; day++) {
         for (int userNum = 0; userNum < UsersNumber; userNum++) {
            llDisplay(Users[day][userNum]);
@@ -342,24 +341,27 @@ void repair(listPtr userTrajectory, int gridDistance)  {
 
                     if (prevX < currentX) {
                         meterCounterX += userSpeedM_30sec;
-                        if (meterCounterX > gridDistance) {
+                        while (meterCounterX >= gridDistance) {
                             user.x += 1;
                             meterCounterX -= gridDistance;
                         }
                     } else if (prevX > currentX) {
                         meterCounterX += userSpeedM_30sec;
-                        if (meterCounterX > gridDistance) {
+                        while (meterCounterX >= gridDistance) {
                             user.x -= 1;
+                            meterCounterX -= gridDistance;
                         }
                     } else if (prevY < currentY) {
                         meterCounterY += userSpeedM_30sec;
-                        if (meterCounterY > gridDistance) {
+                        while (meterCounterY >= gridDistance) {
                             user.y += 1;
+                            meterCounterY -= gridDistance;
                         }
                     } else if (prevY > currentY) {
                         meterCounterY += userSpeedM_30sec;
-                        if (meterCounterY > gridDistance) {
+                        while (meterCounterY >= gridDistance) {
                             user.y -= 1;
+                            meterCounterY -= gridDistance;
                         }
                     }
 

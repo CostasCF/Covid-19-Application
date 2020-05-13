@@ -6,17 +6,11 @@
 #include "LinkedList.h"
 
 using namespace std;
-bool repair(int day, listPtr* head)  {
-    bool flag;
-    listPtr newNode;
-    while(flag){
-        if  ( )
-    }
-}
+void repair(listPtr userTrajectory, int gridDistance);
 
 bool userWillMove() {
-    // 33.3% πιθανότητα να κουνηθεί ο χρήστης
-    int random = rand() % 3;
+    // 25% πιθανότητα να κουνηθεί ο χρήστης
+    int random = rand() % 4;
     return random == 1;
 }
 
@@ -38,6 +32,93 @@ int getRandomSpeed() {
     return rand() % 3 + 3; // Χιλιόμετρα την ώρα
 }
 
+// Κουνάει το χρήστη και επιστρέφει
+// true αν ο χρήστης συνεχίζει να κουνιέται και
+// false αν έφτασε στον προορισμό του
+bool moveUser(int specifier, int &x, int &y, int desiredX, int desiredY, double &meterCounterX,
+              double &meterCounterY, double userSpeedM_30sec, int gridDistance) {
+    switch (specifier) {
+        case 1:
+
+            if (x < desiredX) {
+                meterCounterX += userSpeedM_30sec;
+                if (meterCounterX > gridDistance) {
+                    x += 1;
+                    meterCounterX -= gridDistance;
+                }
+            } else if (y < desiredY) {
+                meterCounterY += userSpeedM_30sec;
+                if (meterCounterY > gridDistance) {
+                    y += 1;
+                    meterCounterY -= gridDistance;
+                }
+            } else {
+                return false;
+            }
+            break;
+
+        case 2:
+
+            if (x < desiredX) {
+                meterCounterX += userSpeedM_30sec;
+                if (meterCounterX > gridDistance) {
+                    x += 1;
+                    meterCounterX -= gridDistance;
+                }
+            } else if (y > desiredY) {
+                meterCounterY += userSpeedM_30sec;
+                if (meterCounterY > gridDistance) {
+                    y -= 1;
+                    meterCounterY -= gridDistance;
+                }
+            } else {
+                return false;
+            }
+            break;
+        case 3:
+
+            if (x > desiredX) {
+                meterCounterX += userSpeedM_30sec;
+                if (meterCounterX > gridDistance) {
+                    x -= 1;
+                    meterCounterX -= gridDistance;
+                }
+            } else if (y < desiredY) {
+                meterCounterY += userSpeedM_30sec;
+                if (meterCounterY > gridDistance) {
+                    y += 1;
+                    meterCounterY -= gridDistance;
+                }
+            } else {
+                return false;
+            }
+            break;
+
+        case 4:
+
+            if (x > desiredX) {
+                meterCounterX += userSpeedM_30sec;
+                if (meterCounterX > gridDistance) {
+                    x -= 1;
+                    meterCounterX -= gridDistance;
+                }
+            } else if (y > desiredY) {
+                meterCounterY += userSpeedM_30sec;
+                if (meterCounterY > gridDistance) {
+                    y -= 1;
+                    meterCounterY -= gridDistance;
+                }
+            } else {
+                return false;
+            }
+            break;
+
+        default:
+            cout << "Something went wrong" << endl;
+    }
+    return true;
+}
+
 
 
 int main() {
@@ -52,7 +133,7 @@ int main() {
     int grid[D][D];
 
     // Ορισμός της απόστασης μεταξύ κάθε στοιχείου του πλέγματος σε μέτρα
-    const int gridDistance = 50;
+    const int gridDistance = 40;
 
     // Δημιουργεία χρηστών
     const int UsersNumber = 2;
@@ -113,7 +194,7 @@ int main() {
 
             // Int που χρησιμοποιείται σε ένα switch παρακάτω ώστε να ξεκινήσει η σωστή διαδικασία
             // ανάλογα με την τοποθεσία του χρήστη σε σχέση με την τοποθεσία που θέλει να πάει
-            int cases;
+            int specifier;
 
             // Επανάληψη που κρατάει όσο τα δευτερόλεπτα μίας ημέρας και αυξάνεται ανα 30
             for (int daySeconds = 0; daySeconds < 86400; daySeconds += 30) {
@@ -132,144 +213,164 @@ int main() {
 
 
                 // Ορισμός τυχαίων συντεταγμένων του χρήστη
-                // Συντεταγμένες
-                if (gpsWorked()) { // H gpsWorked επιστρέφει true αν το gps δούλεψε, αλλιώς false
+                if (!userMoving && userWillMove()) {   // H UserWillMove επιλέγει τυχαία αν ο χρήστης θα επιλέξει
+                                                    // νέα τοποθεσία ή θα παραμείνει στάσιμος
+                    desiredX = getRandomX(D);
+                    desiredY = getRandomY(D);
+                }
 
-                    if (!userMoving && userWillMove()) {   // H UserWillMove επιλέγει τυχαία αν ο χρήστης θα επιλέξει
-                                                        // νέα τοποθεσία ή θα παραμείνει στάσιμος
-                        desiredX = getRandomX(D);
-                        desiredY = getRandomY(D);
-                    }
+                if (user.x != desiredX || user.y != desiredY) {
 
-                    if (user.x != desiredX || user.y != desiredY) {
+                    // Αν ο χρήστης δεν κινείται αλλά θέλει να αλλάξει τοποθεσία τότε
+                    // Του δίνουμε μία ταχύτητα
+                    // Το συγκεκριμένο if εκτελείται μόνο την πρώτη φορά που ο χρήστης αποφασίζει να κινηθεί
+                    if (!userMoving) {
+                        userSpeedKm_h = getRandomSpeed(); // Επιστρέφει μία τυχαία ταχύτητα από 3 έως 6 km/h
+                        userSpeedM_30sec = (double)userSpeedKm_h*1000/60/2; // Μετατροπή των km/h σε μέτρα ανά 30 δευτερόλεπτα
+                        userMoving = true; // Ο χρήστης αρχίζει να κινείται
 
-                        // Αν ο χρήστης δεν κινείται αλλά θέλει να αλλάξει τοποθεσία τότε
-                        // Του δίνουμε μία ταχύτητα
-                        // Το συγκεκριμένο if εκτελείται μόνο την πρώτη φορά που ο χρήστης αποφασίζει να κινηθεί
-                        if (!userMoving) {
-                            userSpeedKm_h = getRandomSpeed(); // Επιστρέφει μία τυχαία ταχύτητα από 3 έως 6 km/h
-                            userSpeedM_30sec = (double)userSpeedKm_h*1000/60/2; // Μετατροπή των km/h σε μέτρα ανά 30 δευτερόλεπτα
-                            userMoving = true; // Ο χρήστης αρχίζει να κινείται
-
-                            // Ολες οι περιπτώσεις για τα μεγέθη των user.x, desiredX, user.y και desiredY
-                            // Βρίσκει για πια περίπτωση πρόκειται και γίνονται οι κατάλληλες ενέργειες στο
-                            // switch που ακολουθεί
-                            if (user.x <= desiredX && user.y <= desiredY) {
-                                cases = 1;
-                            } else if (user.x <= desiredX && user.y >= desiredY) {
-                                cases = 2;
-                            } else if (user.x >= desiredX && user.y <= desiredY) {
-                                cases = 3;
-                            } else {
-                                cases = 4;
-                            }
-
+                        // Ολες οι περιπτώσεις για τα μεγέθη των user.x, desiredX, user.y και desiredY
+                        // Βρίσκει για πια περίπτωση πρόκειται και γίνονται οι κατάλληλες ενέργειες στο
+                        // switch που ακολουθεί
+                        if (user.x <= desiredX && user.y <= desiredY) {
+                            specifier = 1;
+                        } else if (user.x <= desiredX && user.y >= desiredY) {
+                            specifier = 2;
+                        } else if (user.x >= desiredX && user.y <= desiredY) {
+                            specifier = 3;
+                        } else {
+                            specifier = 4;
                         }
 
                     }
 
-                    switch (cases) {
-                        case 1:
+                }
 
-                            if (user.x < desiredX) {
-                                meterCounterX += userSpeedM_30sec;
-                                if (meterCounterX > gridDistance) {
-                                    user.x += 1;
-                                    meterCounterX -= gridDistance;
-                                }
-                            } else if (user.y < desiredY) {
-                                meterCounterY += userSpeedM_30sec;
-                                if (meterCounterY > gridDistance) {
-                                    user.y += 1;
-                                    meterCounterY -= gridDistance;
-                                }
-                            }  else {
-                                userMoving = false;
-                            }
-                            break;
+                if (userMoving) {
+                    // Κουνάει το χρήστη και ανανεώνει τη userMoving μεταβλητή
+                    userMoving = moveUser(specifier, user.x, user.y, desiredX, desiredY, meterCounterX,
+                                meterCounterY, userSpeedM_30sec, gridDistance);
+                }
 
-                        case 2:
+                user.seconds = seconds;
+                user.minutes = minutes;
+                user.hours = hours;
 
-                            if (user.x < desiredX) {
-                                meterCounterX += userSpeedM_30sec;
-                                if (meterCounterX > gridDistance) {
-                                    user.x += 1;
-                                    meterCounterX -= gridDistance;
-                                }
-                            } else if (user.y > desiredY) {
-                                meterCounterY += userSpeedM_30sec;
-                                if (meterCounterY > gridDistance) {
-                                    user.y -= 1;
-                                    meterCounterY -= gridDistance;
-                                }
-                            } else {
-                                userMoving = false;
-                            }
-                            break;
-                        case 3:
 
-                            if (user.x > desiredX) {
-                                meterCounterX += userSpeedM_30sec;
-                                if (meterCounterX > gridDistance) {
-                                    user.x -= 1;
-                                    meterCounterX -= gridDistance;
-                                }
-                            } else if (user.y < desiredY) {
-                                meterCounterY += userSpeedM_30sec;
-                                if (meterCounterY > gridDistance) {
-                                    user.y += 1;
-                                    meterCounterY -= gridDistance;
-                                }
-                            }  else {
-                                userMoving = false;
-                            }
-                            break;
-
-                        case 4:
-
-                            if (user.x > desiredX) {
-                                meterCounterX += userSpeedM_30sec;
-                                if (meterCounterX > gridDistance) {
-                                    user.x -= 1;
-                                    meterCounterX -= gridDistance;
-                                }
-                            } else if (user.y > desiredY) {
-                                meterCounterY += userSpeedM_30sec;
-                                if (meterCounterY > gridDistance) {
-                                    user.y -= 1;
-                                    meterCounterY -= gridDistance;
-                                }
-                            } else {
-                                userMoving = false;
-                            }
-                            break;
-
-                        default:
-                            cout << "Κάτι πάει λάθος" << endl;
-                    }
-
-                    user.seconds = seconds;
-                    user.minutes = minutes;
-                    user.hours = hours;
-
+                if (gpsWorked()) { // H gpsWorked επιστρέφει true αν το gps δούλεψε, αλλιώς false
                     // Εισαγωγή στη λίστα του συγκεκριμένου χρήστη της συγκεκριμένης μέρας
                     // της πληροφορίας περί απόστασης, χρόνου, id και κατάστασης μόλυνσης
                     llInsertEnd(&Users[day][userNum], user);
-
                 }
-
                 seconds += 30;
 
             }
-            //calling repair()
-            repair(Users[day][&userNum]);
+
         }
+        // Κάλεσμα repair
+        for (int userNum = 0; userNum < UsersNumber; userNum++)
+            repair(Users[day][userNum], gridDistance);
 
     }
 
+    cout << endl << endl << endl;
     for (int day = 0; day < daysNum; day++) {
         for (int userNum = 0; userNum < UsersNumber; userNum++) {
            llDisplay(Users[day][userNum]);
         }
     }
+}
+
+void repair(listPtr userTrajectory, int gridDistance)  {
+    // Μετατροπή ωρών, λεπτών και δευτερολέπτων σε δευτερόλεπτα
+    listPtr current;
+    listPtr prev;
+
+    prev = userTrajectory;
+    current = prev;
+    while (current != nullptr) {
+        current = prev->next;
+
+        if (current != nullptr) {
+            int prevInstanceSeconds = llData(prev).seconds + llData(prev).minutes * 60
+                                      + llData(prev).hours * 60 * 60;
+            int instanceSeconds = llData(current).seconds + llData(current).minutes * 60
+                                  + llData(current).hours * 60 * 60;
+            int secondsDiff = instanceSeconds - prevInstanceSeconds;
+
+            if (secondsDiff > 30) {
+
+                int prevX = llData(prev).x;
+                int currentX = llData(current).x;
+                double meterCounterX = 0;
+
+                int prevY = llData(prev).y;
+                int currentY = llData(current).y;
+                double meterCounterY = 0;
+
+                User user{};
+
+                user.x = prevX;
+                user.y = prevY;
+
+                user.id = llData(prev).id;
+                user.infected = llData(prev).infected;
+
+                // Βλέπε β' Λυκείου μαθηματικά κατεύθυνσης απόσταση 2 σημείων
+                double realDistance = sqrt(pow((llData(current).x - llData(prev).x), 2)
+                                           + pow((llData(current).y - llData(prev).y), 2)) * gridDistance;
+                double userSpeed = realDistance / 30;
+                double userSpeedM_30sec = userSpeed*1000/60/2;
+
+                for (int seconds = 30; seconds < secondsDiff; seconds += 30) {
+
+                    user.seconds = llData(prev).seconds + 30;
+                    user.minutes = llData(prev).minutes;
+                    user.hours = llData(prev).hours;
+
+                    // Μετατροπή δευτερολέπτων σε λεπτά
+                    if (user.seconds == 60) {
+                        user.minutes++;
+                        user.seconds = 0;
+                    }
+
+                    // Μετατροπή λεπτών σε ώρες
+                    if (user.minutes == 60) {
+                        user.hours++;
+                        user.minutes = 0;
+                    }
+
+                    if (prevX < currentX) {
+                        meterCounterX += userSpeedM_30sec;
+                        if (meterCounterX > gridDistance) {
+                            user.x += 1;
+                            meterCounterX -= gridDistance;
+                        }
+                    } else if (prevX > currentX) {
+                        meterCounterX += userSpeedM_30sec;
+                        if (meterCounterX > gridDistance) {
+                            user.x -= 1;
+                        }
+                    } else if (prevY < currentY) {
+                        meterCounterY += userSpeedM_30sec;
+                        if (meterCounterY > gridDistance) {
+                            user.y += 1;
+                        }
+                    } else if (prevY > currentY) {
+                        meterCounterY += userSpeedM_30sec;
+                        if (meterCounterY > gridDistance) {
+                            user.y -= 1;
+                        }
+                    }
+
+                    llInsertAfter(prev, user);
+
+                    prev = prev->next;
+                }
+            }
+        }
+        prev = current;
+
+    }
+
 }

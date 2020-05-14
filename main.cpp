@@ -8,7 +8,7 @@
 using namespace std;
 void repair(listPtr userTrajectory, int gridDistance);
 
-int FIND_CROWDED_PLACES(listPtr pNode, int i);
+int FIND_CROWDED_PLACES(listPtr pNode, int i, int i1);
 
 bool userWillMove() {
     // 25% πιθανότητα να κουνηθεί ο χρήστης
@@ -285,15 +285,22 @@ int main() {
     }
     //συνεχεια της main
     //καλεσμα FIND_CROWDED_PLACES
-    int crowd = FIND_CROWDED_PLACES(Users[1][UsersNumber],300):
+
+    int crowd = FIND_CROWDED_PLACES(Users[1][UsersNumber],300,D );
 
 }
 
 //time = δευτερολεπτα που παρεμειναν οι χρηστες σε μια περιοχη
-int FIND_CROWDED_PLACES(listPtr pNode, int i) {
+int FIND_CROWDED_PLACES(listPtr pNode, int time, int D) {
+    int grid[D][D];
     int crowd;
     listPtr current = pNode;
-    return 0;
+    /* Πρεπει να συγκρίνουμε όλες τις συντεταγμενες των χρηστών ωστε να βρουμε τα σημεια που ειναι ιδιες  (δηλαδη συναντήθηκαν στο ιδιο σημειο x,y δυο χρήστες )
+     * το ιδιο χρονικο διαστημα πχ απο τις 4:00 μεχρι τις 4:15
+     * ,να τους καταγράψουμε στην μεταβλητη crowd και
+     * επίσης να καταγράψουμε τον ελάχιστο χρόνο που δεν μετακινήθηκαν καθόλου απο την στιγμή που ξεκίνησε η συνάντηση τους.
+     * */
+    return crowd;
 }
 
 

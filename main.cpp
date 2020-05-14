@@ -10,6 +10,8 @@ using namespace std;
 bool possibleCOVID_19Infection(listPtr userTrajectory, listPtr allUsers);
 void repair(listPtr userTrajectory, int gridDistance);
 
+int FIND_CROWDED_PLACES(listPtr pNode, int i, int i1);
+
 bool userWillMove() {
     // 33.3% πιθανότητα να κουνηθεί ο χρήστης
     int random = rand() % 3;
@@ -166,7 +168,6 @@ int main() {
 
     // Επανάληψη για τις μέρες
     for (int day = 0; day < daysNum; day++) {
-
         for (int userNum = 0; userNum < UsersNumber; userNum++) {
 
             // Δημιουργία αντικειμένου User
@@ -276,6 +277,7 @@ int main() {
 
             }
 
+
         }
 
         for (int userNum = 0; userNum < UsersNumber; userNum++) {
@@ -290,18 +292,41 @@ int main() {
                 possibleCOVID_19Infection(Users[day][userNum], Users);
             }
         }
+
     }
+
 
     for (int day = 0; day < daysNum; day++) {
         for (int userNum = 0; userNum < UsersNumber; userNum++) {
-           llDisplay(Users[day][userNum]);
+            cout<<endl<<"new day new life"<<endl;
+            llDisplay(Users[day][userNum]);
         }
     }
+    //συνεχεια της main
+    //καλεσμα FIND_CROWDED_PLACES
+
+   // int crowd = FIND_CROWDED_PLACES(Users[1][UsersNumber],300,D );
+
 }
 
 bool possibleCOVID_19Infection(listPtr userTrajectory, listPtr allUsers) {
 
 }
+
+
+//time = δευτερολεπτα που παρεμειναν οι χρηστες σε μια περιοχη
+int FIND_CROWDED_PLACES(listPtr pNode, int time, int D) {
+    int grid[D][D];
+    int crowd;
+    listPtr current = pNode;
+    /* Πρεπει να συγκρίνουμε όλες τις συντεταγμενες των χρηστών ωστε να βρουμε τα σημεια που ειναι ιδιες  (δηλαδη συναντήθηκαν στο ιδιο σημειο x,y δυο χρήστες )
+     * το ιδιο χρονικο διαστημα πχ απο τις 4:00 μεχρι τις 4:15
+     * ,να τους καταγράψουμε στην μεταβλητη crowd και
+     * επίσης να καταγράψουμε τον ελάχιστο χρόνο που δεν μετακινήθηκαν καθόλου απο την στιγμή που ξεκίνησε η συνάντηση τους.
+     * */
+    return crowd;
+}
+
 
 
 void repair(listPtr userTrajectory, int gridDistance)  {
@@ -398,5 +423,4 @@ void repair(listPtr userTrajectory, int gridDistance)  {
         prev = current;
 
     }
-
 }

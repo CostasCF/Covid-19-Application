@@ -43,10 +43,10 @@ RM = "C:\Program Files\JetBrains\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe" -E 
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\Michalis\Documents\GitHub\Covid-19-Application
+CMAKE_SOURCE_DIR = C:\Users\kkalo\OneDrive\Documents\GitHub\Covid-19-Application
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\Michalis\Documents\GitHub\Covid-19-Application\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\kkalo\OneDrive\Documents\GitHub\Covid-19-Application\cmake-build-debug
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -73,14 +73,14 @@ clean: CMakeFiles/Covid_19_Application.dir/clean
 CMakeFiles/Covid_19_Application.dir/all:
 	$(MAKE) -f CMakeFiles\Covid_19_Application.dir\build.make CMakeFiles/Covid_19_Application.dir/depend
 	$(MAKE) -f CMakeFiles\Covid_19_Application.dir\build.make CMakeFiles/Covid_19_Application.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\Michalis\Documents\GitHub\Covid-19-Application\cmake-build-debug\CMakeFiles --progress-num=1,2,3 "Built target Covid_19_Application"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\kkalo\OneDrive\Documents\GitHub\Covid-19-Application\cmake-build-debug\CMakeFiles --progress-num=1,2,3 "Built target Covid_19_Application"
 .PHONY : CMakeFiles/Covid_19_Application.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Covid_19_Application.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Michalis\Documents\GitHub\Covid-19-Application\cmake-build-debug\CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\kkalo\OneDrive\Documents\GitHub\Covid-19-Application\cmake-build-debug\CMakeFiles 3
 	$(MAKE) -f CMakeFiles\Makefile2 CMakeFiles/Covid_19_Application.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Michalis\Documents\GitHub\Covid-19-Application\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\kkalo\OneDrive\Documents\GitHub\Covid-19-Application\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles/Covid_19_Application.dir/rule
 
 # Convenience name for target.

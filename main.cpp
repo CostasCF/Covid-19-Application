@@ -286,7 +286,7 @@ int main() {
     //συνεχεια της main
     //καλεσμα FIND_CROWDED_PLACES
 
-    int crowd = FIND_CROWDED_PLACES(Users[1][UsersNumber],300,D );
+   // int crowd = FIND_CROWDED_PLACES(Users[1][UsersNumber],300,D );
 
 }
 

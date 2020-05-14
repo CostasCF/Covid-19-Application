@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/Michalis/Documents/GitHub/Covid-19-Application
+# Install script for directory: C:/Users/kkalo/OneDrive/Documents/GitHub/Covid-19-Application
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/Michalis/Documents/GitHub/Covid-19-Application/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/kkalo/OneDrive/Documents/GitHub/Covid-19-Application/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

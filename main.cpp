@@ -8,6 +8,8 @@
 using namespace std;
 void repair(listPtr userTrajectory, int gridDistance);
 
+int FIND_CROWDED_PLACES(listPtr pNode, int i);
+
 bool userWillMove() {
     // 25% πιθανότητα να κουνηθεί ο χρήστης
     int random = rand() % 4;
@@ -156,7 +158,6 @@ int main() {
 
     // Επανάληψη για τις μέρες
     for (int day = 0; day < daysNum; day++) {
-
         for (int userNum = 0; userNum < UsersNumber; userNum++) {
 
             // Δημιουργία αντικειμένου User
@@ -266,19 +267,36 @@ int main() {
 
             }
 
+
         }
         // Κάλεσμα repair
         for (int userNum = 0; userNum < UsersNumber; userNum++)
             repair(Users[day][userNum], gridDistance);
 
+
     }
+
 
     for (int day = 0; day < daysNum; day++) {
         for (int userNum = 0; userNum < UsersNumber; userNum++) {
-           llDisplay(Users[day][userNum]);
+            cout<<endl<<"new day new life"<<endl;
+            llDisplay(Users[day][userNum]);
         }
     }
+    //συνεχεια της main
+    //καλεσμα FIND_CROWDED_PLACES
+    int crowd = FIND_CROWDED_PLACES(Users[1][UsersNumber],300):
+
 }
+
+//time = δευτερολεπτα που παρεμειναν οι χρηστες σε μια περιοχη
+int FIND_CROWDED_PLACES(listPtr pNode, int i) {
+    int crowd;
+    listPtr current = pNode;
+    return 0;
+}
+
+
 
 void repair(listPtr userTrajectory, int gridDistance)  {
     // Μετατροπή ωρών, λεπτών και δευτερολέπτων σε δευτερόλεπτα
@@ -374,5 +392,4 @@ void repair(listPtr userTrajectory, int gridDistance)  {
         prev = current;
 
     }
-
 }

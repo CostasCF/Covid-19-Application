@@ -6,11 +6,13 @@
 #include "LinkedList.h"
 
 using namespace std;
+
+bool possibleCOVID_19Infection(listPtr userTrajectory, listPtr allUsers);
 void repair(listPtr userTrajectory, int gridDistance);
 
 bool userWillMove() {
-    // 25% πιθανότητα να κουνηθεί ο χρήστης
-    int random = rand() % 4;
+    // 33.3% πιθανότητα να κουνηθεί ο χρήστης
+    int random = rand() % 3;
     return random == 1;
 }
 
@@ -32,6 +34,38 @@ int getRandomSpeed() {
     return rand() % 3 + 3; // Χιλιόμετρα την ώρα
 }
 
+void increaseX(int &x, int desiredX, double &meterCounterX, double userSpeedM_30sec, int gridDistance) {
+    meterCounterX += userSpeedM_30sec;
+    while (meterCounterX >= gridDistance && x < desiredX) {
+        x += 1;
+        meterCounterX -= gridDistance;
+    }
+}
+
+void decreaseX(int &x, int desiredX, double &meterCounterX, double userSpeedM_30sec, int gridDistance) {
+    meterCounterX += userSpeedM_30sec;
+    while (meterCounterX >= gridDistance && x > desiredX) {
+        x -= 1;
+        meterCounterX -= gridDistance;
+    }
+}
+
+void increaseY(int &y, int desiredY, double &meterCounterY, double userSpeedM_30sec, int gridDistance) {
+    meterCounterY += userSpeedM_30sec;
+    while (meterCounterY >= gridDistance && y < desiredY) {
+        y += 1;
+        meterCounterY -= gridDistance;
+    }
+}
+
+void decreaseY(int &y, int desiredY, double &meterCounterY, double userSpeedM_30sec, int gridDistance) {
+    meterCounterY += userSpeedM_30sec;
+    while (meterCounterY >= gridDistance && y > desiredY) {
+        y -= 1;
+        meterCounterY -= gridDistance;
+    }
+}
+
 // Κουνάει το χρήστη και επιστρέφει
 // true αν ο χρήστης συνεχίζει να κουνιέται και
 // false αν έφτασε στον προορισμό του
@@ -41,18 +75,12 @@ bool moveUser(int specifier, int &x, int &y, int desiredX, int desiredY, double 
         case 1:
 
             if (x < desiredX) {
-                meterCounterX += userSpeedM_30sec;
-                while (meterCounterX >= gridDistance) {
-                    x += 1;
-                    meterCounterX -= gridDistance;
-                }
+                increaseX(x, desiredX ,meterCounterX, userSpeedM_30sec, gridDistance);
             } else if (y < desiredY) {
-                meterCounterY += userSpeedM_30sec;
-                while (meterCounterY >= gridDistance) {
-                    y += 1;
-                    meterCounterY -= gridDistance;
-                }
+                increaseY(y, desiredY ,meterCounterY, userSpeedM_30sec, gridDistance);
             } else {
+                meterCounterX = 0;
+                meterCounterY = 0;
                 return false;
             }
             break;
@@ -60,36 +88,24 @@ bool moveUser(int specifier, int &x, int &y, int desiredX, int desiredY, double 
         case 2:
 
             if (x < desiredX) {
-                meterCounterX += userSpeedM_30sec;
-                while (meterCounterX >= gridDistance) {
-                    x += 1;
-                    meterCounterX -= gridDistance;
-                }
+                increaseX(x, desiredX, meterCounterX, userSpeedM_30sec, gridDistance);
             } else if (y > desiredY) {
-                meterCounterY += userSpeedM_30sec;
-                while (meterCounterY >= gridDistance) {
-                    y -= 1;
-                    meterCounterY -= gridDistance;
-                }
+                decreaseY(y, desiredY, meterCounterY, userSpeedM_30sec, gridDistance);
             } else {
+                meterCounterX = 0;
+                meterCounterY = 0;
                 return false;
             }
             break;
         case 3:
 
             if (x > desiredX) {
-                meterCounterX += userSpeedM_30sec;
-                while (meterCounterX >= gridDistance) {
-                    x -= 1;
-                    meterCounterX -= gridDistance;
-                }
+                decreaseX(x, desiredX ,meterCounterX, userSpeedM_30sec, gridDistance);
             } else if (y < desiredY) {
-                meterCounterY += userSpeedM_30sec;
-                while (meterCounterY >= gridDistance) {
-                    y += 1;
-                    meterCounterY -= gridDistance;
-                }
+                increaseY(y, desiredY ,meterCounterY, userSpeedM_30sec, gridDistance);
             } else {
+                meterCounterX = 0;
+                meterCounterY = 0;
                 return false;
             }
             break;
@@ -97,18 +113,12 @@ bool moveUser(int specifier, int &x, int &y, int desiredX, int desiredY, double 
         case 4:
 
             if (x > desiredX) {
-                meterCounterX += userSpeedM_30sec;
-                while (meterCounterX >= gridDistance) {
-                    x -= 1;
-                    meterCounterX -= gridDistance;
-                }
+                decreaseX(x, desiredX ,meterCounterX, userSpeedM_30sec, gridDistance);
             } else if (y > desiredY) {
-                meterCounterY += userSpeedM_30sec;
-                while (meterCounterY >= gridDistance) {
-                    y -= 1;
-                    meterCounterY -= gridDistance;
-                }
+                decreaseY(y, desiredY ,meterCounterY, userSpeedM_30sec, gridDistance);
             } else {
+                meterCounterX = 0;
+                meterCounterY = 0;
                 return false;
             }
             break;
@@ -133,7 +143,7 @@ int main() {
     int grid[D][D];
 
     // Ορισμός της απόστασης μεταξύ κάθε στοιχείου του πλέγματος σε μέτρα
-    const int gridDistance = 30;
+    const int gridDistance = 20;
 
     // Ορισμός χρηστών
     const int UsersNumber = 2;
@@ -267,10 +277,19 @@ int main() {
             }
 
         }
-        // Κάλεσμα repair
-        for (int userNum = 0; userNum < UsersNumber; userNum++)
-            repair(Users[day][userNum], gridDistance);
 
+        for (int userNum = 0; userNum < UsersNumber; userNum++) {
+            // Κάλεσμα repair
+            repair(Users[day][userNum], gridDistance);
+        }
+
+        for (int userNum = 0; userNum < UsersNumber; userNum++) {
+            // Κάλεσμα possible COVID-19 Infection
+            bool userIsSick = llData(Users[day][userNum]).infected;
+            if (!userIsSick) {
+                possibleCOVID_19Infection(Users[day][userNum], Users);
+            }
+        }
     }
 
     for (int day = 0; day < daysNum; day++) {
@@ -279,6 +298,11 @@ int main() {
         }
     }
 }
+
+bool possibleCOVID_19Infection(listPtr userTrajectory, listPtr allUsers) {
+
+}
+
 
 void repair(listPtr userTrajectory, int gridDistance)  {
     // Μετατροπή ωρών, λεπτών και δευτερολέπτων σε δευτερόλεπτα

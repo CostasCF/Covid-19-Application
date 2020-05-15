@@ -9,7 +9,8 @@ using namespace std;
 
 bool possibleCOVID_19Infection(listPtr userTrajectory, listPtr allUsers[], int usersNumber);
 void repair(listPtr userTrajectory, int gridDistance);
-int FIND_CROWDED_PLACES(listPtr pNode, int i, int i1);
+int FIND_CROWDED_PLACES(listPtr userPosition, int TimeInterval, int D, int MinimumStayDuration);
+
 
 bool userWillMove() {
     // 33.3% πιθανότητα να κουνηθεί ο χρήστης
@@ -138,7 +139,7 @@ int main() {
     srand(time(nullptr));
 
     // Παραγωγή ενός τυχαίου αριθμού από 50 έως 100 για τις διαστάσεις του πλέγματος
-    const int D = rand() % 50 + 50;
+    int D = rand() % 50 + 50;
 
     // Δημιουργεία του πλέγματος
     int grid[D][D];
@@ -304,22 +305,80 @@ int main() {
     //συνεχεια της main
     //καλεσμα FIND_CROWDED_PLACES
 
-   // int crowd = FIND_CROWDED_PLACES(Users[1][UsersNumber],300,D );
+
+    cout << FIND_CROWDED_PLACES(Users[1][UsersNumber], 3000, 500, 400) << endl;
 
 }
 
+/*
 bool possibleCOVID_19Infection(listPtr userTrajectory, listPtr allUsers[], int usersNumber) {
     for (int i = 0; i < usersNumber; i++) {
         //bool userIsSick = llData(allUsers[i][]);
     }
-}
+}*/
 
 
 //time = δευτερολεπτα που παρεμειναν οι χρηστες σε μια περιοχη
-int FIND_CROWDED_PLACES(listPtr pNode, int time, int D) {
-    int grid[D][D];
+int FIND_CROWDED_PLACES(listPtr userPosition, int TimeInterval, int D, int MinimumStayDuration) {
+   // int grid[D][D];
+    User user{};
     int crowd;
-    listPtr current = pNode;
+    listPtr userCurrent;
+    listPtr userPrev;
+    listPtr current;
+    listPtr prev;
+
+
+    int timer;
+    userPrev = userPosition;
+    userCurrent = userPrev;
+    prev = userPosition;
+    current = prev;
+    int instanceSeconds = llData(current).seconds + llData(current).minutes * 60
+                          + llData(current).hours * 60 * 60;
+
+
+
+while (userCurrent != nullptr) { //επαναληψη για χρηστες
+        userCurrent = userPrev ->next;
+        //οσο η στιγμαια ωρα που δινεται ειναι μικρότερη απο την τελικη ώρα που δινεται, επαναλαβε και τσεκαρε
+        //συντεταγμενες καθε 30 δευτερολεπτα
+            for(int instanceSeconds;instanceSeconds<=TimeInterval; instanceSeconds+=30) {
+                 while (current != nullptr) { //επαναληψη για συντενταγμενες
+                     current = prev->next;
+                     int prevX = llData(prev).x;
+                      int currentX = llData(current).x;
+
+                     int prevY = llData(prev).y;
+                     int currentY = llData(current).y;
+
+                    //αρχικοποίηση λογικων
+                     bool flag = false;
+                     bool flagSquare = false;
+
+                     if ((currentX = prevX) && (currentY = prevY)) { //εαν δεν μετακινήθηκαν
+                          flag = true;
+                       } else {
+                         flag = false;
+                        }
+                     if (prevX < D && prevY < D) { // και βρισκονται στο δοθεν region
+                           flagSquare = true;
+                             timer += 30; // μεταβλητη που μετραει το χρονο που βρέθηκε ο χρηστης μεσα στο region
+                      } else {
+                            flagSquare = false;
+                         }
+                     prev = current;
+                 }
+
+         if (timer <= MinimumStayDuration) {
+            crowd += 1;
+        }
+        userPrev = userCurrent;
+    }
+}
+
+
+
     /* Πρεπει να συγκρίνουμε τις συντεταγμενες των χρηστών στη μέρα που δίνεται ωστε να βρουμε εάν βρίσκονται στο
      * square region of interest στο δοθέν χρονικό περιθώριο (TimeInterval)
      * πχ απο τις 4:00:00 μεχρι τις 4:15:00

@@ -7,9 +7,8 @@
 
 using namespace std;
 
-bool possibleCOVID_19Infection(listPtr userTrajectory, listPtr allUsers);
+bool possibleCOVID_19Infection(listPtr userTrajectory, listPtr allUsers[], int usersNumber);
 void repair(listPtr userTrajectory, int gridDistance);
-
 int FIND_CROWDED_PLACES(listPtr pNode, int i, int i1);
 
 bool userWillMove() {
@@ -289,7 +288,7 @@ int main() {
             // Κάλεσμα possible COVID-19 Infection
             bool userIsSick = llData(Users[day][userNum]).infected;
             if (!userIsSick) {
-                possibleCOVID_19Infection(Users[day][userNum], Users);
+                //possibleCOVID_19Infection(UsersNumber, Users[day][userNum], Users);
             }
         }
 
@@ -309,8 +308,10 @@ int main() {
 
 }
 
-bool possibleCOVID_19Infection(listPtr userTrajectory, listPtr allUsers) {
-
+bool possibleCOVID_19Infection(listPtr userTrajectory, listPtr allUsers[], int usersNumber) {
+    for (int i = 0; i < usersNumber; i++) {
+        //bool userIsSick = llData(allUsers[i][]);
+    }
 }
 
 
@@ -319,10 +320,11 @@ int FIND_CROWDED_PLACES(listPtr pNode, int time, int D) {
     int grid[D][D];
     int crowd;
     listPtr current = pNode;
-    /* Πρεπει να συγκρίνουμε όλες τις συντεταγμενες των χρηστών ωστε να βρουμε τα σημεια που ειναι ιδιες  (δηλαδη συναντήθηκαν στο ιδιο σημειο x,y δυο χρήστες )
-     * το ιδιο χρονικο διαστημα πχ απο τις 4:00 μεχρι τις 4:15
-     * ,να τους καταγράψουμε στην μεταβλητη crowd και
-     * επίσης να καταγράψουμε τον ελάχιστο χρόνο που δεν μετακινήθηκαν καθόλου απο την στιγμή που ξεκίνησε η συνάντηση τους.
+    /* Πρεπει να συγκρίνουμε τις συντεταγμενες των χρηστών στη μέρα που δίνεται ωστε να βρουμε εάν βρίσκονται στο
+     * square region of interest στο δοθέν χρονικό περιθώριο (TimeInterval)
+     * πχ απο τις 4:00:00 μεχρι τις 4:15:00
+     * και να τους καταγράψουμε στην μεταβλητη crowd εφόσον
+     * δεν μετακινήθηκαν έξω από το square region of interest στον ελάχιστον χρόνο (Minimum Stay Duration).
      * */
     return crowd;
 }
@@ -368,6 +370,7 @@ void repair(listPtr userTrajectory, int gridDistance)  {
                 double realDistance = sqrt(pow((llData(current).x - llData(prev).x), 2)
                                            + pow((llData(current).y - llData(prev).y), 2)) * gridDistance;
                 double userSpeed = realDistance / 30;
+                // Μετατροπή km/h σε μέτρα ανά 30 δευτερόλεπτα
                 double userSpeedM_30sec = userSpeed*1000/60/2;
 
                 for (int seconds = 30; seconds < secondsDiff; seconds += 30) {

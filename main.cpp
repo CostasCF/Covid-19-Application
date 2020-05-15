@@ -334,6 +334,7 @@ int FIND_CROWDED_PLACES(listPtr userPosition, int TimeInterval, int D, int Minim
     userCurrent = userPrev;
     prev = userPosition;
     current = prev;
+    //στιγμαίος χρονος
     int instanceSeconds = llData(current).seconds + llData(current).minutes * 60
                           + llData(current).hours * 60 * 60;
 
@@ -343,7 +344,7 @@ while (userCurrent != nullptr) { //επαναληψη για χρηστες
         userCurrent = userPrev ->next;
         //οσο η στιγμαια ωρα που δινεται ειναι μικρότερη απο την τελικη ώρα που δινεται, επαναλαβε και τσεκαρε
         //συντεταγμενες καθε 30 δευτερολεπτα
-            for(int instanceSeconds;instanceSeconds<=TimeInterval; instanceSeconds+=30) {
+            for(int i = instanceSeconds; i<=TimeInterval; i+=30) {
                  while (current != nullptr) { //επαναληψη για συντενταγμενες
                      current = prev->next;
                      int prevX = llData(prev).x;

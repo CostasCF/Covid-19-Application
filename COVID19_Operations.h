@@ -9,10 +9,10 @@ const int D = rand() % 50 + 50;
 const int gridDistance = 20;
 
 // Ορισμός χρηστών
-const int usersNumber = 2;
+const int usersNumber = 50;
 
 // Ορισμός ημερών
-const int daysNum = 2;
+const int daysNum = 3;
 
 bool possibleCOVID_19Infection(listPtr userTrajectory, int day, listPtr allUsers[], int usersNumber);
 void repair(listPtr userTrajectory);

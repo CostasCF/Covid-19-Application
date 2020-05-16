@@ -279,32 +279,32 @@ int main() {
         if (answer == 1) {
 
             int startTime = 3600; // από τη 1
-            int endTime = 7200; // μέχρι τις 2
+            int endTime = 5000; // μέχρι τις 2
             //cout << "Type the time interval" << endl;
             //cin >> timeInterval;
 
-            int squareRegionOfInterest = 30; // 30x30
+            int squareRegionOfInterest = 40; // 25x25
             //cout << "Type the squareRegionOfInterest" << endl;
             //cin >> squareRegionOfInterest;
 
-            int minimumStayDuration = 300; // 5 λεπτά
+            int minimumStayDuration = 180; // 3 λεπτά
             //cout << "Type the minimum stay duration" << endl;
             //cin >> minimumStayDuration;
 
             cout << "Based on the provided data there were " <<
-                 findCrowdedPlaces(day, startTime, endTime, squareRegionOfInterest, minimumStayDuration, Users) << " people" << endl;
+            findCrowdedPlaces(day, startTime, endTime, squareRegionOfInterest, minimumStayDuration, Users) << " people" << endl;
 
         }
 
     }
 
 
-    for (int day = 0; day < daysNum; day++) {
+    /*for (int day = 0; day < daysNum; day++) {
         cout<<endl<<"new day new life"<<endl;
         for (int userNum = 0; userNum < usersNumber; userNum++) {
             llDisplay(Users[day][userNum]);
         }
-    }
+    }*/
 
 }
 

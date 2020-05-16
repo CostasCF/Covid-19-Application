@@ -74,75 +74,75 @@ int findCrowdedPlaces(int day, int startSeconds, int endSeconds, int squareRegio
 
     // Μετρητής των χρηστών
     int userCounter = 0;
-    // Επανάληψη για τους χρήστες
-    for (int userNum = 0; userNum <= usersNumber; userNum++) {
+
+    for (int userNum = 0; userNum < usersNumber; userNum++) {
 
         listPtr userTrajectory = users[day][userNum]; // Pointer στην αρχή της λίστας του userNum χρήστη για την day μέρα
 
-        int timeInSeconds;  // Χρησιμοποιείται για να μετατραπεί η μορφή της ώρας απο ώρες, λέπτα και δευτερόλεπτα
-                                // σε δευτερόλεπτα
+            int timeInSeconds;  // Χρησιμοποιείται για να μετατραπεί η μορφή της ώρας απο ώρες, λέπτα και δευτερόλεπτα
+            // σε δευτερόλεπτα
 
-        // Συντεταγμένες του χρήστη
-        int userX;
-        int userY;
+            // Συντεταγμένες του χρήστη
+            int userX;
+            int userY;
 
-        // H συγκεκριμένη επανάληψη κρατάει μέχρι να βρεθεί η χρονική στιγμή η οποία
-        // δόθηκε από το χρήστη και να αποθηκευτούν οι αντίστοιχες συντεταγμένες
-        while (true) {
+            // H συγκεκριμένη επανάληψη κρατάει μέχρι να βρεθεί η χρονική στιγμή η οποία
+            // δόθηκε από το χρήστη και να αποθηκευτούν οι αντίστοιχες συντεταγμένες
+            while (true) {
 
-            // Ανάκτηση της ώρα σε ώρες, λεπτά και δευτερόλεπτα
-            int userSeconds = llData(userTrajectory).seconds;
-            int userMinutes = llData(userTrajectory).minutes;
-            int userHours = llData(userTrajectory).hours;
+                // Ανάκτηση της ώρα σε ώρες, λεπτά και δευτερόλεπτα
+                int userSeconds = llData(userTrajectory).seconds;
+                int userMinutes = llData(userTrajectory).minutes;
+                int userHours = llData(userTrajectory).hours;
 
-            // Μετατροπή σε δευτερόλεπτα
-            timeInSeconds = userSeconds + userMinutes * 60 + userHours * 60 * 60;
+                // Μετατροπή σε δευτερόλεπτα
+                timeInSeconds = userSeconds + userMinutes * 60 + userHours * 60 * 60;
 
-            if (timeInSeconds == startSeconds) {
-                break;
-            } else {
-                userTrajectory = userTrajectory->next; // Μετάβαση στον επόμενο κόμβο εφόσον δεν έχει βρεθεί η σωστή ώρα
+                if (timeInSeconds == startSeconds) {
+                    break;
+                } else {
+                    userTrajectory = userTrajectory->next; // Μετάβαση στον επόμενο κόμβο εφόσον δεν έχει βρεθεί η σωστή ώρα
+                }
+
             }
 
-        }
+            bool userStayedInRegion = true; // Λογική μεταβλητή που υποδικνύει εάν ο χρήστης παρέμεινε στην περιοχή ή όχι
+            // Αλλάζει στη συνέχεια εάν διαπιστωθεί ότι δεν παρέμεινε
 
-        bool userStayedInRegion = true; // Λογική μεταβλητή που υποδικνύει εάν ο χρήστης παρέμεινε στην περιοχή ή όχι
-                                        // Αλλάζει στη συνέχεια εάν διαπιστωθεί ότι δεν παρέμεινε
+            // Επανάληψη από την αρχή μέχρι το τέλος της χρονικής διάρκειας που έδωσε ο χρήστης
+            for (int i = startSeconds; i <= endSeconds; i += 30) {
 
-        // Επανάληψη από την αρχή μέχρι το τέλος της χρονικής διάρκειας που έδωσε ο χρήστης
-        for (int i = startSeconds; i <= endSeconds; i += 30) {
+                listPtr temp = userTrajectory; // Χρησιμοποιείται για τη διάσχιση της λίστας χωρίς να αλλάζει το userTrajectory
 
-            listPtr temp = userTrajectory; // Χρησιμοποιείται για τη διάσχιση της λίστας χωρίς να αλλάζει το userTrajectory
+                // Αποθήκευση των συντεταγμένων
+                userX = llData(temp).x;
+                userY = llData(temp).y;
 
-            // Αποθήκευση των συντεταγμένων
-            userX = llData(temp).x;
-            userY = llData(temp).y;
-
-            // Εάν ο υπολοιπόμενος χρόνος είναι αρκετός για να μετρηθεί ένας χρήστης τότε ξεκινάει η διαδικασία ελέγχου
-            if (endSeconds - i >= 0) {
-                for (int j = 0; j <= minimumStayDuration; j += 30) {
-                    // Εάν ο χρήστης βγει από το squareRegionOfInterest πριν συμπληρωθεί το minimumStayDuration
-                    // τότε σπάει η επανάληψη με το minimumStayDuration και το πρόγραμμα συνεχίζει αυξάνοντας το i,
-                    // το οποίο είναι τα δευτερόλεπτα βάσης και ελέγχει το επόμενο χρονικό περιθώριο
-                    if (userX > squareRegionOfInterest || userY > squareRegionOfInterest) {
-                        userStayedInRegion = false;
-                        break;
+                // Εάν ο υπολοιπόμενος χρόνος είναι αρκετός για να μετρηθεί ένας χρήστης τότε ξεκινάει η διαδικασία ελέγχου
+                if (endSeconds - i >= 0) {
+                    for (int j = 0; j <= minimumStayDuration; j += 30) {
+                        // Εάν ο χρήστης βγει από το squareRegionOfInterest πριν συμπληρωθεί το minimumStayDuration
+                        // τότε σπάει η επανάληψη με το minimumStayDuration και το πρόγραμμα συνεχίζει αυξάνοντας το i,
+                        // το οποίο είναι τα δευτερόλεπτα βάσης και ελέγχει το επόμενο χρονικό περιθώριο
+                        if (userX > squareRegionOfInterest || userY > squareRegionOfInterest) {
+                            userStayedInRegion = false;
+                            break;
+                        }
+                        temp = temp->next; // Πηγαίνει στον επόμενο κόμβο
                     }
-                    temp = temp->next; // Πηγαίνει στον επόμενο κόμβο
+                }
+
+                // Εάν ο χρήστης παρέμεινε στο square region of interest κατά τουλάχιστον minimumStayDuration τότε ο μετρητής
+                // αυξάνεται. Διαφορετικά το userTrajectory δείχνει στον επόμενο κόμβο.
+                // Η διαδικασία επαναλαμβάνεται μέχρι ο χρήστης να μείνει κατά το minimumStayDuration στο squareRegionOfInterest
+                // ή να τελειώσει ο χρόνος και στη συνέχεια προχωράει στον επόμενο χρήστη
+                if (userStayedInRegion) {
+                    userCounter++;
+                    break;
+                } else {
+                    userTrajectory = userTrajectory->next;
                 }
             }
-
-            // Εάν ο χρήστης παρέμεινε στο square region of interest κατά τουλάχιστον minimumStayDuration τότε ο μετρητής
-            // αυξάνεται. Διαφορετικά το userTrajectory δείχνει στον επόμενο κόμβο.
-            // Η διαδικασία επαναλαμβάνεται μέχρι ο χρήστης να μείνει κατά το minimumStayDuration στο squareRegionOfInterest
-            // ή να τελειώσει ο χρόνος και στη συνέχεια προχωράει στον επόμενο χρήστη
-            if (userStayedInRegion) {
-                userCounter++;
-                break;
-            } else {
-                userTrajectory = userTrajectory->next;
-            }
-        }
 
     }
     return userCounter;

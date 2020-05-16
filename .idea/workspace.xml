@@ -29,15 +29,17 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68dab85e-dbf2-4108-a3dc-2391f0de344f" name="Default Changelist" comment="(+) Added more comments">
+    <list default="true" id="68dab85e-dbf2-4108-a3dc-2391f0de344f" name="Default Changelist" comment="(+) Added all the comments">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/COVID19_Operations.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/COVID19_Operations.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LinkedList.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/COVID19_Operations.h" beforeDir="false" afterPath="$PROJECT_DIR$/COVID19_Operations.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Covid_19_Application.dir/COVID19_Operations.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Covid_19_Application.dir/COVID19_Operations.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Covid_19_Application.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Covid_19_Application.dir/CXX.includecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Covid_19_Application.dir/LinkedList.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Covid_19_Application.dir/LinkedList.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Covid_19_Application.dir/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Covid_19_Application.dir/main.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Covid_19_Application.dir/objects.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Covid_19_Application.dir/objects.a" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Covid_19_Application.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Covid_19_Application.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +119,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589657303503</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="(+) Added all the comments">
+      <created>1589659445541</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1589659445541</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -140,44 +149,49 @@
     <MESSAGE value="Pushing working version" />
     <MESSAGE value="(+) Added possibleCOVID_19Infection&#10;* Fixed more bugs" />
     <MESSAGE value="(+) Added more comments" />
-    <option name="LAST_COMMIT_MESSAGE" value="(+) Added more comments" />
+    <MESSAGE value="(+) Added all the comments" />
+    <option name="LAST_COMMIT_MESSAGE" value="(+) Added all the comments" />
   </component>
   <component name="WindowStateProjectService">
     <state width="447" height="466" key="DebuggerActiveHint" timestamp="1589645031427">
       <screen x="0" y="0" width="1360" height="768" />
     </state>
     <state width="447" height="466" key="DebuggerActiveHint/0.0.1360.768@0.0.1360.768" timestamp="1589645031427" />
-    <state width="1317" height="238" key="GridCell.Tab.0.bottom" timestamp="1589657327714">
+    <state width="1317" height="238" key="GridCell.Tab.0.bottom" timestamp="1589662978411">
       <screen x="0" y="0" width="1360" height="768" />
     </state>
-    <state width="1317" height="238" key="GridCell.Tab.0.bottom/0.0.1360.768@0.0.1360.768" timestamp="1589657327714" />
-    <state width="1317" height="238" key="GridCell.Tab.0.center" timestamp="1589657327714">
+    <state width="1317" height="238" key="GridCell.Tab.0.bottom/0.0.1360.768@0.0.1360.768" timestamp="1589662978411" />
+    <state width="1317" height="238" key="GridCell.Tab.0.center" timestamp="1589662978411">
       <screen x="0" y="0" width="1360" height="768" />
     </state>
-    <state width="1317" height="238" key="GridCell.Tab.0.center/0.0.1360.768@0.0.1360.768" timestamp="1589657327714" />
-    <state width="1317" height="238" key="GridCell.Tab.0.left" timestamp="1589657327714">
+    <state width="1317" height="238" key="GridCell.Tab.0.center/0.0.1360.768@0.0.1360.768" timestamp="1589662978411" />
+    <state width="1317" height="238" key="GridCell.Tab.0.left" timestamp="1589662978410">
       <screen x="0" y="0" width="1360" height="768" />
     </state>
-    <state width="1317" height="238" key="GridCell.Tab.0.left/0.0.1360.768@0.0.1360.768" timestamp="1589657327714" />
-    <state width="1317" height="238" key="GridCell.Tab.0.right" timestamp="1589657327714">
+    <state width="1317" height="238" key="GridCell.Tab.0.left/0.0.1360.768@0.0.1360.768" timestamp="1589662978410" />
+    <state width="1317" height="238" key="GridCell.Tab.0.right" timestamp="1589662978411">
       <screen x="0" y="0" width="1360" height="768" />
     </state>
-    <state width="1317" height="238" key="GridCell.Tab.0.right/0.0.1360.768@0.0.1360.768" timestamp="1589657327714" />
-    <state width="1317" height="238" key="GridCell.Tab.1.bottom" timestamp="1589657327714">
+    <state width="1317" height="238" key="GridCell.Tab.0.right/0.0.1360.768@0.0.1360.768" timestamp="1589662978411" />
+    <state width="1317" height="238" key="GridCell.Tab.1.bottom" timestamp="1589662978412">
       <screen x="0" y="0" width="1360" height="768" />
     </state>
-    <state width="1317" height="238" key="GridCell.Tab.1.bottom/0.0.1360.768@0.0.1360.768" timestamp="1589657327714" />
-    <state width="1317" height="238" key="GridCell.Tab.1.center" timestamp="1589657327714">
+    <state width="1317" height="238" key="GridCell.Tab.1.bottom/0.0.1360.768@0.0.1360.768" timestamp="1589662978412" />
+    <state width="1317" height="238" key="GridCell.Tab.1.center" timestamp="1589662978412">
       <screen x="0" y="0" width="1360" height="768" />
     </state>
-    <state width="1317" height="238" key="GridCell.Tab.1.center/0.0.1360.768@0.0.1360.768" timestamp="1589657327714" />
-    <state width="1317" height="238" key="GridCell.Tab.1.left" timestamp="1589657327714">
+    <state width="1317" height="238" key="GridCell.Tab.1.center/0.0.1360.768@0.0.1360.768" timestamp="1589662978412" />
+    <state width="1317" height="238" key="GridCell.Tab.1.left" timestamp="1589662978412">
       <screen x="0" y="0" width="1360" height="768" />
     </state>
-    <state width="1317" height="238" key="GridCell.Tab.1.left/0.0.1360.768@0.0.1360.768" timestamp="1589657327714" />
-    <state width="1317" height="238" key="GridCell.Tab.1.right" timestamp="1589657327714">
+    <state width="1317" height="238" key="GridCell.Tab.1.left/0.0.1360.768@0.0.1360.768" timestamp="1589662978412" />
+    <state width="1317" height="238" key="GridCell.Tab.1.right" timestamp="1589662978412">
       <screen x="0" y="0" width="1360" height="768" />
     </state>
-    <state width="1317" height="238" key="GridCell.Tab.1.right/0.0.1360.768@0.0.1360.768" timestamp="1589657327714" />
+    <state width="1317" height="238" key="GridCell.Tab.1.right/0.0.1360.768@0.0.1360.768" timestamp="1589662978412" />
+    <state x="343" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1589661348617">
+      <screen x="0" y="0" width="1360" height="768" />
+    </state>
+    <state x="343" y="89" width="672" height="678" key="search.everywhere.popup/0.0.1360.768@0.0.1360.768" timestamp="1589661348617" />
   </component>
 </project>

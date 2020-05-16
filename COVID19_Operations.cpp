@@ -296,3 +296,44 @@ void repair(listPtr userTrajectory)  {
 
     }
 }
+
+// Για όρισμα χρησιμοποιείται και πάλι μόνο το userTrajectory λόγω του δισδιάστατου πίνακα με τις τροχιές των χρηστών
+void summarizeTrajectory(listPtr userTrajectory) {
+    int R = rand() % 5 + 1; // Τυχαία τιμή από 1 μέχρι 5 για την ακτίνα
+
+    // Πρώτο στίγμα
+    int userX = llData(userTrajectory).x;
+    int userY = llData(userTrajectory).y;
+
+    listPtr current = userTrajectory;
+    listPtr prev = userTrajectory;
+    bool coordinatesInsideR = true;
+    while (coordinatesInsideR) {
+
+        if (current->next != nullptr) {
+
+            current = prev->next;
+            // Συντεταγμένες της current χρονικής στιγμής
+            int currentX = llData(current).x;
+            int currentY = llData(current).y;
+
+            // Χρήση του μαθηματικού τύπου της απόστασης
+            double distance = sqrt(pow(currentX - userX, 2) + pow(currentY - userY, 2));
+
+            // Αν η απόσταση είναι μικρότερη της ακτίνας τότε ο κόμβος διαγράφεται
+            if (distance < R) {
+                llDeleteAfter(prev, &prev->data);
+            } else {
+                userX = llData(current).x;
+                userY = llData(current).y;
+                coordinatesInsideR = false;
+            }
+
+            // Επόμενος κόμβος εφόσον υπάρχει
+            prev = current;
+
+        } else {
+            break;
+        }
+    }
+}

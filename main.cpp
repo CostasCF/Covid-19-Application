@@ -337,6 +337,17 @@ int main() {
 
     }
 
+    // Εκτέλεση της Summarize trajectory την 7η μέρα για την 1η
+    // H summarize trajectory έχει κάποιο error και γι αυτό μένει στα σχόλια
+    /*for (int userNum = 0; userNum < usersNumber; userNum++) {
+        summarizeTrajectory(Users[0][userNum]);
+    }*/
+
+    // H παρακάτω επανάληψη συνίσταται για τη δοκιμή της summarizeTrajectory καθώς εμφανίζει μόνο την πρώτη μέρα
+    /*for (int userNum = 0; userNum < usersNumber; userNum++) {
+        llDisplay(Users[0][userNum]);
+    }*/
+
     // Η παρακάτω επανάληψη εμφανίζει την πορεία όλων των χρηστών για κάθε μέρα. Χρησιμοποιήθηκε κυρίως για
     // δοκιμαστικούς λόγους και γι αυτό βρίσκεται σε σχόλια
 

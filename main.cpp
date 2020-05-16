@@ -4,13 +4,9 @@
 
 #include "User.h"
 #include "LinkedList.h"
+#include "COVID19_Operations.h"
 
 using namespace std;
-
-bool possibleCOVID_19Infection(listPtr userTrajectory, int day, listPtr allUsers[], int usersNumber);
-void repair(listPtr userTrajectory, int gridDistance);
-int FIND_CROWDED_PLACES(listPtr userPosition, int TimeInterval, int D, int MinimumStayDuration);
-
 
 bool userWillMove() {
     // 33.3% πιθανότητα να κουνηθεί ο χρήστης
@@ -131,34 +127,17 @@ bool moveUser(int specifier, int &x, int &y, int desiredX, int desiredY, double 
     return true;
 }
 
-
-
 int main() {
 
     // srand ώστε να μην παράγονται οι ίδιοι αριθμοί κάθε φορά που τρέχει το πρόγραμμα
     srand(time(nullptr));
 
-    // Παραγωγή ενός τυχαίου αριθμού από 50 έως 100 για τις διαστάσεις του πλέγματος
-    int D = rand() % 50 + 50;
-
-    // Δημιουργεία του πλέγματος
-    int grid[D][D];
-
-    // Ορισμός της απόστασης μεταξύ κάθε στοιχείου του πλέγματος σε μέτρα
-    const int gridDistance = 20;
-
-    // Ορισμός χρηστών
-    const int UsersNumber = 2;
-
-    // Ορισμός ημερών
-    const int daysNum = 2;
-
     // Δήλωση ενός δισδιάστατου πίνακα του τύπου listPtr που κάθε γραμμή αντιστοιχεί σε μία μέρα
     // και περιέχει μία απλά συνδεδεμένη λίστα για την τροχιά του κάθε χρήστη εκείνη τη μέρα
-    listPtr Users[daysNum][UsersNumber];
+    listPtr Users[daysNum][usersNumber];
 
     for (int day = 0; day < daysNum; day++) {
-        for (int userNum = 0; userNum < UsersNumber; userNum++) {
+        for (int userNum = 0; userNum < usersNumber; userNum++) {
 
             // Αρχικοποίηση όλων των συνδεδεμένων λίστών με την τιμή null
             llInit(&Users[day][userNum]);
@@ -168,7 +147,7 @@ int main() {
 
     // Επανάληψη για τις μέρες
     for (int day = 0; day < daysNum; day++) {
-        for (int userNum = 0; userNum < UsersNumber; userNum++) {
+        for (int userNum = 0; userNum < usersNumber; userNum++) {
 
             // Δημιουργία αντικειμένου User
             User user{};
@@ -280,120 +259,95 @@ int main() {
 
         }
 
-        for (int userNum = 0; userNum < UsersNumber; userNum++) {
+        for (int userNum = 0; userNum < usersNumber; userNum++) {
             // Κάλεσμα repair
-            repair(Users[day][userNum], gridDistance);
+            repair(Users[day][userNum]);
         }
 
-        for (int userNum = 0; userNum < UsersNumber; userNum++) {
+        /*for (int userNum = 0; userNum < usersNumber; userNum++) {
             // Κάλεσμα possible COVID-19 Infection
             bool userIsSick = llData(Users[day][userNum]).infected;
             if (!userIsSick) {
-                possibleCOVID_19Infection(Users[day][userNum], day, *Users, UsersNumber);
+                //possibleCOVID_19Infection(Users[day][userNum], day, *Users);
+                cout << "nvm" << endl;
             }
+        }*/
+
+        int answer;
+        cout << "Do you want to check for crowded places? Press 1 for yes, or 0 for no" << endl;
+        cin >> answer;
+        if (answer == 1) {
+
+            int startTime = 3600; // από τη 1
+            int endTime = 7200; // μέχρι τις 2
+            //cout << "Type the time interval" << endl;
+            //cin >> timeInterval;
+
+            int squareRegionOfInterest = 30; // 30x30
+            //cout << "Type the squareRegionOfInterest" << endl;
+            //cin >> squareRegionOfInterest;
+
+            int minimumStayDuration = 300; // 5 λεπτά
+            //cout << "Type the minimum stay duration" << endl;
+            //cin >> minimumStayDuration;
+
+            cout << "Based on the provided data there were " <<
+                 findCrowdedPlaces(day, startTime, endTime, squareRegionOfInterest, minimumStayDuration, Users) << " people" << endl;
+
         }
 
     }
 
 
     for (int day = 0; day < daysNum; day++) {
-        for (int userNum = 0; userNum < UsersNumber; userNum++) {
-            cout<<endl<<"new day new life"<<endl;
+        cout<<endl<<"new day new life"<<endl;
+        for (int userNum = 0; userNum < usersNumber; userNum++) {
             llDisplay(Users[day][userNum]);
         }
     }
-    //συνεχεια της main
-    //καλεσμα FIND_CROWDED_PLACES
-
-
-    cout << FIND_CROWDED_PLACES(Users[1][UsersNumber], 3000, 500, 400) << endl;
 
 }
 
-bool possibleCOVID_19Infection(listPtr userTrajectory, int day, listPtr *allUsers[], int usersNumber) {
-    for (int userID = 0; userID < usersNumber; userID++) {
-        bool userIsSick = llData(allUsers[day][userID]).infected;
-        if (userIsSick) {
-
-            int seconds = 0;
-            int minutes = 0;
-            int hours = 0;
-
-            int R = rand() % 5 + 1; // random τιμή από 1 μέχρι 5
-            int T1 = rand() % 10800 + 1; // random τιμή από 1 δευτερόλεπτο μέχρι 3 ώρες
-            int T2 = rand() % 21600 + 3600; // random τιμή από 1 μέχρι 6 ώρες
-
-            bool stayedAtLeastT1Seconds = false;
-            int secondsStayed = 0;
-
-            for (int daySeconds = 0; daySeconds < 86400; daySeconds += 30) {
-
-                // Μετατροπή δευτερολέπτων σε λεπτά
-                if (seconds == 60) {
-                    minutes++;
-                    seconds = 0;
-                }
-
-                // Μετατροπή λεπτών σε ώρες
-                if (minutes == 60) {
-                    hours++;
-                    minutes = 0;
-                }
-
-                int userX = llData(userTrajectory).x;
-                int userY = llData(userTrajectory).y;
-
-                int infectedUserX = llData(allUsers[day][userID]).x;
-                int infectedUserY = llData(allUsers[day][userID]).y;
-
-                double distance = sqrt(pow(infectedUserX - userX, 2) + pow(infectedUserY - userY, 2));
-
-                if (distance <= R) {
-                    secondsStayed += 30;
-                } else {
-                    secondsStayed = 0;
-                }
-
-                if (secondsStayed >= T1) {
-                    stayedAtLeastT1Seconds = true;
-                }
-
-                seconds += 30;
-
-                userTrajectory = userTrajectory->next;
-            }
-        }
-    }
-    return false;
-}
-/*
-bool possibleCOVID_19Infection(listPtr userTrajectory, listPtr allUsers[], int usersNumber) {
-    for (int i = 0; i < usersNumber; i++) {
-        //bool userIsSick = llData(allUsers[i][]);
-    }
-}*/
 
 
-//time = δευτερολεπτα που παρεμειναν οι χρηστες σε μια περιοχη
-int FIND_CROWDED_PLACES(listPtr userPosition, int TimeInterval, int D, int MinimumStayDuration) {
-   // int grid[D][D];
-    User user{};
-    int crowd;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*User user{};
+
+    int crowd = 0;
     listPtr userCurrent;
     listPtr userPrev;
     listPtr current;
     listPtr prev;
 
-
-    int timer;
+    int timer = 0;
     userPrev = userPosition;
     userCurrent = userPrev;
     prev = userPosition;
     current = prev;
+
     //στιγμαίος χρονος
     int instanceSeconds = llData(current).seconds + llData(current).minutes * 60
                           + llData(current).hours * 60 * 60;
-
 
 
     while (userCurrent != nullptr) { //επαναληψη για χρηστες
@@ -404,7 +358,7 @@ int FIND_CROWDED_PLACES(listPtr userPosition, int TimeInterval, int D, int Minim
                  while (current != nullptr) { //επαναληψη για συντενταγμενες
                      current = prev->next;
                      int prevX = llData(prev).x;
-                      int currentX = llData(current).x;
+                     int currentX = llData(current).x;
 
                      int prevY = llData(prev).y;
                      int currentY = llData(current).y;
@@ -413,17 +367,16 @@ int FIND_CROWDED_PLACES(listPtr userPosition, int TimeInterval, int D, int Minim
                      bool flag = false;
                      bool flagSquare = false;
 
-                     if ((currentX = prevX) && (currentY = prevY)) { //εαν δεν μετακινήθηκαν
-                          flag = true;
-                       } else {
-                         flag = false;
-                        }
-                     if (prevX < D && prevY < D) { // και βρισκονται στο δοθεν region
-                           flagSquare = true;
-                             timer += 30; // μεταβλητη που μετραει το χρονο που βρέθηκε ο χρηστης μεσα στο region
-                      } else {
-                            flagSquare = false;
-                         }
+                     flag = (currentX == prevX) && (currentY == prevY);
+
+
+
+                     if (prevX < D && prevY < D && flag) { // και βρισκονται στο δοθεν region
+                         flagSquare = true;
+                         timer += 30; // μεταβλητη που μετραει το χρονο που βρέθηκε ο χρηστης μεσα στο region
+                     } else {
+                         flagSquare = false;
+                     }
                      prev = current;
                  }
 
@@ -436,110 +389,5 @@ int FIND_CROWDED_PLACES(listPtr userPosition, int TimeInterval, int D, int Minim
 
 
 
-    /* Πρεπει να συγκρίνουμε τις συντεταγμενες των χρηστών στη μέρα που δίνεται ωστε να βρουμε εάν βρίσκονται στο
-     * square region of interest στο δοθέν χρονικό περιθώριο (TimeInterval)
-     * πχ απο τις 4:00:00 μεχρι τις 4:15:00
-     * και να τους καταγράψουμε στην μεταβλητη crowd εφόσον
-     * δεν μετακινήθηκαν έξω από το square region of interest στον ελάχιστον χρόνο (Minimum Stay Duration).
-     * */
-    return crowd;
-}
-
-
-
-void repair(listPtr userTrajectory, int gridDistance)  {
-    // Μετατροπή ωρών, λεπτών και δευτερολέπτων σε δευτερόλεπτα
-    listPtr current;
-    listPtr prev;
-
-    prev = userTrajectory;
-    current = prev;
-    while (current != nullptr) {
-        current = prev->next;
-
-        if (current != nullptr) {
-            int prevInstanceSeconds = llData(prev).seconds + llData(prev).minutes * 60
-                                      + llData(prev).hours * 60 * 60;
-            int instanceSeconds = llData(current).seconds + llData(current).minutes * 60
-                                  + llData(current).hours * 60 * 60;
-            int secondsDiff = instanceSeconds - prevInstanceSeconds;
-
-            if (secondsDiff > 30) {
-
-                int prevX = llData(prev).x;
-                int currentX = llData(current).x;
-                double meterCounterX = 0;
-
-                int prevY = llData(prev).y;
-                int currentY = llData(current).y;
-                double meterCounterY = 0;
-
-                User user{};
-
-                user.x = prevX;
-                user.y = prevY;
-
-                user.id = llData(prev).id;
-                user.infected = llData(prev).infected;
-
-                // Βλέπε β' Λυκείου μαθηματικά κατεύθυνσης απόσταση 2 σημείων
-                double realDistance = sqrt(pow((llData(current).x - llData(prev).x), 2)
-                                           + pow((llData(current).y - llData(prev).y), 2)) * gridDistance;
-                double userSpeed = realDistance / 30;
-                // Μετατροπή km/h σε μέτρα ανά 30 δευτερόλεπτα
-                double userSpeedM_30sec = userSpeed*1000/60/2;
-
-                for (int seconds = 30; seconds < secondsDiff; seconds += 30) {
-
-                    user.seconds = llData(prev).seconds + 30;
-                    user.minutes = llData(prev).minutes;
-                    user.hours = llData(prev).hours;
-
-                    // Μετατροπή δευτερολέπτων σε λεπτά
-                    if (user.seconds == 60) {
-                        user.minutes++;
-                        user.seconds = 0;
-                    }
-
-                    // Μετατροπή λεπτών σε ώρες
-                    if (user.minutes == 60) {
-                        user.hours++;
-                        user.minutes = 0;
-                    }
-
-                    if (prevX < currentX) {
-                        meterCounterX += userSpeedM_30sec;
-                        while (meterCounterX >= gridDistance) {
-                            user.x += 1;
-                            meterCounterX -= gridDistance;
-                        }
-                    } else if (prevX > currentX) {
-                        meterCounterX += userSpeedM_30sec;
-                        while (meterCounterX >= gridDistance) {
-                            user.x -= 1;
-                            meterCounterX -= gridDistance;
-                        }
-                    } else if (prevY < currentY) {
-                        meterCounterY += userSpeedM_30sec;
-                        while (meterCounterY >= gridDistance) {
-                            user.y += 1;
-                            meterCounterY -= gridDistance;
-                        }
-                    } else if (prevY > currentY) {
-                        meterCounterY += userSpeedM_30sec;
-                        while (meterCounterY >= gridDistance) {
-                            user.y -= 1;
-                            meterCounterY -= gridDistance;
-                        }
-                    }
-
-                    llInsertAfter(prev, user);
-
-                    prev = prev->next;
-                }
-            }
-        }
-        prev = current;
-
-    }
-}
+    *//*
+    return crowd;*/

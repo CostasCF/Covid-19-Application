@@ -6,23 +6,21 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/kkalo/OneDrive/Documents/GitHub/Covid-19-Application/LinkedList.h
-User.h
-C:/Users/kkalo/OneDrive/Documents/GitHub/Covid-19-Application/User.h
-
-C:/Users/kkalo/OneDrive/Documents/GitHub/Covid-19-Application/User.h
-iostream
--
-
-C:/Users/kkalo/OneDrive/Documents/GitHub/Covid-19-Application/main.cpp
-iostream
--
-ctime
--
+C:/Users/Michalis/Documents/GitHub/Covid-19-Application/COVID19_Operations.cpp
 cmath
 -
-User.h
-C:/Users/kkalo/OneDrive/Documents/GitHub/Covid-19-Application/User.h
+COVID19_Operations.h
+C:/Users/Michalis/Documents/GitHub/Covid-19-Application/COVID19_Operations.h
+
+C:/Users/Michalis/Documents/GitHub/Covid-19-Application/COVID19_Operations.h
 LinkedList.h
-C:/Users/kkalo/OneDrive/Documents/GitHub/Covid-19-Application/LinkedList.h
+C:/Users/Michalis/Documents/GitHub/Covid-19-Application/LinkedList.h
+
+C:/Users/Michalis/Documents/GitHub/Covid-19-Application/LinkedList.h
+User.h
+C:/Users/Michalis/Documents/GitHub/Covid-19-Application/User.h
+
+C:/Users/Michalis/Documents/GitHub/Covid-19-Application/User.h
+iostream
+-
 

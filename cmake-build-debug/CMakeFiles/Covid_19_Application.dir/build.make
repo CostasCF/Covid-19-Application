@@ -42,10 +42,10 @@ RM = "C:\Program Files\JetBrains\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe" -E 
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\kkalo\OneDrive\Documents\GitHub\Covid-19-Application
+CMAKE_SOURCE_DIR = C:\Users\Michalis\Documents\GitHub\Covid-19-Application
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\kkalo\OneDrive\Documents\GitHub\Covid-19-Application\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\Michalis\Documents\GitHub\Covid-19-Application\cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Covid_19_Application.dir/depend.make
@@ -56,49 +56,65 @@ include CMakeFiles/Covid_19_Application.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/Covid_19_Application.dir/flags.make
 
+CMakeFiles/Covid_19_Application.dir/COVID19_Operations.cpp.obj: CMakeFiles/Covid_19_Application.dir/flags.make
+CMakeFiles/Covid_19_Application.dir/COVID19_Operations.cpp.obj: CMakeFiles/Covid_19_Application.dir/includes_CXX.rsp
+CMakeFiles/Covid_19_Application.dir/COVID19_Operations.cpp.obj: ../COVID19_Operations.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Michalis\Documents\GitHub\Covid-19-Application\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Covid_19_Application.dir/COVID19_Operations.cpp.obj"
+	C:\MinGW\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Covid_19_Application.dir\COVID19_Operations.cpp.obj -c C:\Users\Michalis\Documents\GitHub\Covid-19-Application\COVID19_Operations.cpp
+
+CMakeFiles/Covid_19_Application.dir/COVID19_Operations.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Covid_19_Application.dir/COVID19_Operations.cpp.i"
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Michalis\Documents\GitHub\Covid-19-Application\COVID19_Operations.cpp > CMakeFiles\Covid_19_Application.dir\COVID19_Operations.cpp.i
+
+CMakeFiles/Covid_19_Application.dir/COVID19_Operations.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Covid_19_Application.dir/COVID19_Operations.cpp.s"
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Michalis\Documents\GitHub\Covid-19-Application\COVID19_Operations.cpp -o CMakeFiles\Covid_19_Application.dir\COVID19_Operations.cpp.s
+
 CMakeFiles/Covid_19_Application.dir/LinkedList.cpp.obj: CMakeFiles/Covid_19_Application.dir/flags.make
 CMakeFiles/Covid_19_Application.dir/LinkedList.cpp.obj: CMakeFiles/Covid_19_Application.dir/includes_CXX.rsp
 CMakeFiles/Covid_19_Application.dir/LinkedList.cpp.obj: ../LinkedList.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\kkalo\OneDrive\Documents\GitHub\Covid-19-Application\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Covid_19_Application.dir/LinkedList.cpp.obj"
-	C:\MinGW\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Covid_19_Application.dir\LinkedList.cpp.obj -c C:\Users\kkalo\OneDrive\Documents\GitHub\Covid-19-Application\LinkedList.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Michalis\Documents\GitHub\Covid-19-Application\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Covid_19_Application.dir/LinkedList.cpp.obj"
+	C:\MinGW\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Covid_19_Application.dir\LinkedList.cpp.obj -c C:\Users\Michalis\Documents\GitHub\Covid-19-Application\LinkedList.cpp
 
 CMakeFiles/Covid_19_Application.dir/LinkedList.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Covid_19_Application.dir/LinkedList.cpp.i"
-	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\kkalo\OneDrive\Documents\GitHub\Covid-19-Application\LinkedList.cpp > CMakeFiles\Covid_19_Application.dir\LinkedList.cpp.i
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Michalis\Documents\GitHub\Covid-19-Application\LinkedList.cpp > CMakeFiles\Covid_19_Application.dir\LinkedList.cpp.i
 
 CMakeFiles/Covid_19_Application.dir/LinkedList.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Covid_19_Application.dir/LinkedList.cpp.s"
-	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\kkalo\OneDrive\Documents\GitHub\Covid-19-Application\LinkedList.cpp -o CMakeFiles\Covid_19_Application.dir\LinkedList.cpp.s
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Michalis\Documents\GitHub\Covid-19-Application\LinkedList.cpp -o CMakeFiles\Covid_19_Application.dir\LinkedList.cpp.s
 
 CMakeFiles/Covid_19_Application.dir/main.cpp.obj: CMakeFiles/Covid_19_Application.dir/flags.make
 CMakeFiles/Covid_19_Application.dir/main.cpp.obj: CMakeFiles/Covid_19_Application.dir/includes_CXX.rsp
 CMakeFiles/Covid_19_Application.dir/main.cpp.obj: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\kkalo\OneDrive\Documents\GitHub\Covid-19-Application\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Covid_19_Application.dir/main.cpp.obj"
-	C:\MinGW\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Covid_19_Application.dir\main.cpp.obj -c C:\Users\kkalo\OneDrive\Documents\GitHub\Covid-19-Application\main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Michalis\Documents\GitHub\Covid-19-Application\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Covid_19_Application.dir/main.cpp.obj"
+	C:\MinGW\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Covid_19_Application.dir\main.cpp.obj -c C:\Users\Michalis\Documents\GitHub\Covid-19-Application\main.cpp
 
 CMakeFiles/Covid_19_Application.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Covid_19_Application.dir/main.cpp.i"
-	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\kkalo\OneDrive\Documents\GitHub\Covid-19-Application\main.cpp > CMakeFiles\Covid_19_Application.dir\main.cpp.i
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Michalis\Documents\GitHub\Covid-19-Application\main.cpp > CMakeFiles\Covid_19_Application.dir\main.cpp.i
 
 CMakeFiles/Covid_19_Application.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Covid_19_Application.dir/main.cpp.s"
-	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\kkalo\OneDrive\Documents\GitHub\Covid-19-Application\main.cpp -o CMakeFiles\Covid_19_Application.dir\main.cpp.s
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Michalis\Documents\GitHub\Covid-19-Application\main.cpp -o CMakeFiles\Covid_19_Application.dir\main.cpp.s
 
 # Object files for target Covid_19_Application
 Covid_19_Application_OBJECTS = \
+"CMakeFiles/Covid_19_Application.dir/COVID19_Operations.cpp.obj" \
 "CMakeFiles/Covid_19_Application.dir/LinkedList.cpp.obj" \
 "CMakeFiles/Covid_19_Application.dir/main.cpp.obj"
 
 # External object files for target Covid_19_Application
 Covid_19_Application_EXTERNAL_OBJECTS =
 
+Covid_19_Application.exe: CMakeFiles/Covid_19_Application.dir/COVID19_Operations.cpp.obj
 Covid_19_Application.exe: CMakeFiles/Covid_19_Application.dir/LinkedList.cpp.obj
 Covid_19_Application.exe: CMakeFiles/Covid_19_Application.dir/main.cpp.obj
 Covid_19_Application.exe: CMakeFiles/Covid_19_Application.dir/build.make
 Covid_19_Application.exe: CMakeFiles/Covid_19_Application.dir/linklibs.rsp
 Covid_19_Application.exe: CMakeFiles/Covid_19_Application.dir/objects1.rsp
 Covid_19_Application.exe: CMakeFiles/Covid_19_Application.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\kkalo\OneDrive\Documents\GitHub\Covid-19-Application\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable Covid_19_Application.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Michalis\Documents\GitHub\Covid-19-Application\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable Covid_19_Application.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Covid_19_Application.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -111,6 +127,6 @@ CMakeFiles/Covid_19_Application.dir/clean:
 .PHONY : CMakeFiles/Covid_19_Application.dir/clean
 
 CMakeFiles/Covid_19_Application.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\kkalo\OneDrive\Documents\GitHub\Covid-19-Application C:\Users\kkalo\OneDrive\Documents\GitHub\Covid-19-Application C:\Users\kkalo\OneDrive\Documents\GitHub\Covid-19-Application\cmake-build-debug C:\Users\kkalo\OneDrive\Documents\GitHub\Covid-19-Application\cmake-build-debug C:\Users\kkalo\OneDrive\Documents\GitHub\Covid-19-Application\cmake-build-debug\CMakeFiles\Covid_19_Application.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Michalis\Documents\GitHub\Covid-19-Application C:\Users\Michalis\Documents\GitHub\Covid-19-Application C:\Users\Michalis\Documents\GitHub\Covid-19-Application\cmake-build-debug C:\Users\Michalis\Documents\GitHub\Covid-19-Application\cmake-build-debug C:\Users\Michalis\Documents\GitHub\Covid-19-Application\cmake-build-debug\CMakeFiles\Covid_19_Application.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/Covid_19_Application.dir/depend
 

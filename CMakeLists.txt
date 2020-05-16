@@ -6,6 +6,8 @@ set(CMAKE_CXX_STANDARD 14)
 include_directories(.)
 
 add_executable(Covid_19_Application
+        COVID19_Operations.cpp
+        COVID19_Operations.h
         LinkedList.cpp
         LinkedList.h
         main.cpp

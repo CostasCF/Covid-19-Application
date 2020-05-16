@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/Covid_19_Application.dir/COVID19_Operations.cpp.obj"
   "CMakeFiles/Covid_19_Application.dir/LinkedList.cpp.obj"
   "CMakeFiles/Covid_19_Application.dir/main.cpp.obj"
   "Covid_19_Application.exe"

@@ -47,10 +47,10 @@ RM = "C:\Program Files\JetBrains\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe" -E 
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\kkalo\OneDrive\Documents\GitHub\Covid-19-Application
+CMAKE_SOURCE_DIR = C:\Users\Michalis\Documents\GitHub\Covid-19-Application
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\kkalo\OneDrive\Documents\GitHub\Covid-19-Application\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\Michalis\Documents\GitHub\Covid-19-Application\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -79,9 +79,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\kkalo\OneDrive\Documents\GitHub\Covid-19-Application\cmake-build-debug\CMakeFiles C:\Users\kkalo\OneDrive\Documents\GitHub\Covid-19-Application\cmake-build-debug\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Michalis\Documents\GitHub\Covid-19-Application\cmake-build-debug\CMakeFiles C:\Users\Michalis\Documents\GitHub\Covid-19-Application\cmake-build-debug\CMakeFiles\progress.marks
 	$(MAKE) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\kkalo\OneDrive\Documents\GitHub\Covid-19-Application\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Michalis\Documents\GitHub\Covid-19-Application\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -121,6 +121,33 @@ Covid_19_Application: cmake_check_build_system
 Covid_19_Application/fast:
 	$(MAKE) -f CMakeFiles\Covid_19_Application.dir\build.make CMakeFiles/Covid_19_Application.dir/build
 .PHONY : Covid_19_Application/fast
+
+COVID19_Operations.obj: COVID19_Operations.cpp.obj
+
+.PHONY : COVID19_Operations.obj
+
+# target to build an object file
+COVID19_Operations.cpp.obj:
+	$(MAKE) -f CMakeFiles\Covid_19_Application.dir\build.make CMakeFiles/Covid_19_Application.dir/COVID19_Operations.cpp.obj
+.PHONY : COVID19_Operations.cpp.obj
+
+COVID19_Operations.i: COVID19_Operations.cpp.i
+
+.PHONY : COVID19_Operations.i
+
+# target to preprocess a source file
+COVID19_Operations.cpp.i:
+	$(MAKE) -f CMakeFiles\Covid_19_Application.dir\build.make CMakeFiles/Covid_19_Application.dir/COVID19_Operations.cpp.i
+.PHONY : COVID19_Operations.cpp.i
+
+COVID19_Operations.s: COVID19_Operations.cpp.s
+
+.PHONY : COVID19_Operations.s
+
+# target to generate assembly for a file
+COVID19_Operations.cpp.s:
+	$(MAKE) -f CMakeFiles\Covid_19_Application.dir\build.make CMakeFiles/Covid_19_Application.dir/COVID19_Operations.cpp.s
+.PHONY : COVID19_Operations.cpp.s
 
 LinkedList.obj: LinkedList.cpp.obj
 
@@ -185,6 +212,9 @@ help:
 	@echo ... Covid_19_Application
 	@echo ... edit_cache
 	@echo ... rebuild_cache
+	@echo ... COVID19_Operations.obj
+	@echo ... COVID19_Operations.i
+	@echo ... COVID19_Operations.s
 	@echo ... LinkedList.obj
 	@echo ... LinkedList.i
 	@echo ... LinkedList.s

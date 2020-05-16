@@ -10,25 +10,6 @@ User llData(listPtr ptr) {
     return ptr->data;
 }
 
-int llInsertStart(listPtr* head, User user) {
-    // Δείκτης σε νέο κόμβο
-    listPtr newNode;
-
-    // Δέσμευση μνήμης για νέο κόμβο
-    newNode = (listNode*)malloc(sizeof(listNode));
-    // Έλεγχος επιτυχίας δέσμευσης μνήμης
-    if (!newNode) {
-        cout << "Memory couldn't be allocated" << endl;
-        return false;
-    }
-    // Προσθήκη του user στο data
-    newNode->data = user;
-
-    newNode->next = *head; // Το next του νέου κόμβου δείχνει εκεί όπου έδειχνε το head
-    *head = newNode; // Και το head τώρα δείχνει στο νέο κόμβο
-    return true;
-}
-
 int llInsertEnd(listPtr* head, User user) {
     listPtr newNode;
 

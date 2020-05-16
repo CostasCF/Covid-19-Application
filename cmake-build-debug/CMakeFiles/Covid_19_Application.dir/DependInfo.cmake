@@ -4,8 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/Users/kkalo/OneDrive/Documents/GitHub/Covid-19-Application/LinkedList.cpp" "C:/Users/kkalo/OneDrive/Documents/GitHub/Covid-19-Application/cmake-build-debug/CMakeFiles/Covid_19_Application.dir/LinkedList.cpp.obj"
-  "C:/Users/kkalo/OneDrive/Documents/GitHub/Covid-19-Application/main.cpp" "C:/Users/kkalo/OneDrive/Documents/GitHub/Covid-19-Application/cmake-build-debug/CMakeFiles/Covid_19_Application.dir/main.cpp.obj"
+  "C:/Users/Michalis/Documents/GitHub/Covid-19-Application/COVID19_Operations.cpp" "C:/Users/Michalis/Documents/GitHub/Covid-19-Application/cmake-build-debug/CMakeFiles/Covid_19_Application.dir/COVID19_Operations.cpp.obj"
+  "C:/Users/Michalis/Documents/GitHub/Covid-19-Application/LinkedList.cpp" "C:/Users/Michalis/Documents/GitHub/Covid-19-Application/cmake-build-debug/CMakeFiles/Covid_19_Application.dir/LinkedList.cpp.obj"
+  "C:/Users/Michalis/Documents/GitHub/Covid-19-Application/main.cpp" "C:/Users/Michalis/Documents/GitHub/Covid-19-Application/cmake-build-debug/CMakeFiles/Covid_19_Application.dir/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

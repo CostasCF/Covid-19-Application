@@ -276,23 +276,20 @@ int main() {
         int answer;
         cout << "Do you want to check for crowded places? Press 1 for yes, or 0 for no" << endl;
         cin >> answer;
+
         if (answer == 1) {
 
-            int startTime = 3600; // από τη 1
-            int endTime = 5000; // μέχρι τις 2
-            //cout << "Type the time interval" << endl;
-            //cin >> timeInterval;
+            int startTime = rand() % 82800; // Τυχαία τιμή από 0 δευτερόλεπτα μέχρι 23 ώρες
+            int endTime = rand() % (86370-startTime) + startTime; // Τυχαία τιμή από το startTime μέχρι το τέλος της μέρας
 
-            int squareRegionOfInterest = 40; // 25x25
-            //cout << "Type the squareRegionOfInterest" << endl;
-            //cin >> squareRegionOfInterest;
+            int squareRegionOfInterest = rand() % (D-20) + 10; // Τυχαία τιμή από 10 μέχρι D-20 (όπου D οι διαστάσεις του πλέγματος)
 
-            int minimumStayDuration = 180; // 3 λεπτά
-            //cout << "Type the minimum stay duration" << endl;
-            //cin >> minimumStayDuration;
+            int minimumStayDuration = rand() % 1800 + 180; // Τυχαία τιμή από 3 λεπτά μέχρι μισή ώρα
 
             cout << "Based on the provided data there were " <<
             findCrowdedPlaces(day, startTime, endTime, squareRegionOfInterest, minimumStayDuration, Users) << " people" << endl;
+
+            //findCrowdedPlaces(day, 3600, 7200, 30, 300, Users)
 
         }
 

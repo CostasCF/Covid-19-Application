@@ -2,7 +2,7 @@
 
 #include "COVID19_Operations.h"
 
-/*bool possibleCOVID_19Infection(listPtr userTrajectory, int day, listPtr *allUsers[]) {
+bool possibleCOVID_19Infection(listPtr userTrajectory, int day, listPtr *allUsers[]) {
     for (int userID = 0; userID < usersNumber; userID++) {
         bool userIsSick = llData(allUsers[day][userID]).infected;
         if (userIsSick) {
@@ -67,7 +67,7 @@
         }
     }
     return false;
-}*/
+}
 
 
 int findCrowdedPlaces(int day, int startSeconds, int endSeconds, int squareRegionOfInterest, int minimumStayDuration, listPtr users[][usersNumber]) {
@@ -76,8 +76,11 @@ int findCrowdedPlaces(int day, int startSeconds, int endSeconds, int squareRegio
     int userCounter = 0;
 
     for (int userNum = 0; userNum < usersNumber; userNum++) {
+        listPtr userTrajectory;
 
-        listPtr userTrajectory = users[day][userNum]; // Pointer στην αρχή της λίστας του userNum χρήστη για την day μέρα
+        // If για την αποφυγή SIGSEGV (Segmentation fault)
+        if (userTrajectory != nullptr) {
+            userTrajectory = users[day][userNum]; // Pointer στην αρχή της λίστας (τροχιάς) του userNum χρήστη για την day μέρα
 
             int timeInSeconds;  // Χρησιμοποιείται για να μετατραπεί η μορφή της ώρας απο ώρες, λέπτα και δευτερόλεπτα
             // σε δευτερόλεπτα
@@ -98,7 +101,7 @@ int findCrowdedPlaces(int day, int startSeconds, int endSeconds, int squareRegio
                 // Μετατροπή σε δευτερόλεπτα
                 timeInSeconds = userSeconds + userMinutes * 60 + userHours * 60 * 60;
 
-                if (timeInSeconds == startSeconds) {
+                if (timeInSeconds >= startSeconds) {
                     break;
                 } else {
                     userTrajectory = userTrajectory->next; // Μετάβαση στον επόμενο κόμβο εφόσον δεν έχει βρεθεί η σωστή ώρα
@@ -128,7 +131,10 @@ int findCrowdedPlaces(int day, int startSeconds, int endSeconds, int squareRegio
                             userStayedInRegion = false;
                             break;
                         }
-                        temp = temp->next; // Πηγαίνει στον επόμενο κόμβο
+                        if (temp != nullptr)
+                            temp = temp->next; // Πηγαίνει στον επόμενο κόμβο
+                        else
+                            break;
                     }
                 }
 
@@ -139,11 +145,15 @@ int findCrowdedPlaces(int day, int startSeconds, int endSeconds, int squareRegio
                 if (userStayedInRegion) {
                     userCounter++;
                     break;
-                } else {
+                } else if (userTrajectory != nullptr) {
                     userTrajectory = userTrajectory->next;
-                }
-            }
+                } else
+                    break;
 
+            }
+        } else {
+            break;
+        }
     }
     return userCounter;
 }

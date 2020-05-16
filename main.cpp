@@ -8,14 +8,14 @@
 
 using namespace std;
 
+// 33.3% πιθανότητα να κουνηθεί ο χρήστης
 bool userWillMove() {
-    // 33.3% πιθανότητα να κουνηθεί ο χρήστης
     int random = rand() % 3;
     return random == 1;
 }
 
+// 10% πιθανότητα να μη δουλέψει το gps και να χαθεί μία χρονική στιγμή
 bool gpsWorked() {
-    // 10% πιθανότητα να μη δουλέψει το gps και να χαθεί μία χρονική στιγμή
     int random = rand() % 10;
     return random != 1;
 }
@@ -142,6 +142,12 @@ bool moveUser(int specifier, int &x, int &y, int desiredX, int desiredY, double 
     return true;
 }
 
+
+
+// ------------------------------------------------- MAIN ------------------------------------------------- \\
+
+
+
 int main() {
 
     // srand ώστε να μην παράγονται οι ίδιοι αριθμοί κάθε φορά που τρέχει το πρόγραμμα
@@ -204,7 +210,7 @@ int main() {
             int hours = 0;
 
             // Int που χρησιμοποιείται σε ένα switch παρακάτω ώστε να ξεκινήσει η σωστή διαδικασία
-            // ανάλογα με την τοποθεσία του χρήστη σε σχέση με την τοποθεσία που θέλει να πάει
+            // με βάση την τοποθεσία του χρήστη σε σχέση με την τοποθεσία που θέλει να πάει
             int specifier;
 
             // Επανάληψη που κρατάει όσο τα δευτερόλεπτα μίας ημέρας και αυξάνεται ανα 30
@@ -223,9 +229,9 @@ int main() {
                 }
 
 
-                // Ορισμός τυχαίων συντεταγμένων του χρήστη
-                if (!userMoving && userWillMove()) {   // H UserWillMove επιλέγει τυχαία αν ο χρήστης θα επιλέξει
-                                                    // νέα τοποθεσία ή θα παραμείνει στάσιμος
+                // Εάν ο χρήστης δεν κινείται ήδη έχει μία πιθανότητα να αποφασίσει να κινηθεί σε νέα τοποθεσία
+                // ή να παραμείνει στάσιμος
+                if (!userMoving && userWillMove()) {
                     desiredX = getRandomX(D);
                     desiredY = getRandomY(D);
                 }
@@ -267,8 +273,8 @@ int main() {
                 user.minutes = minutes;
                 user.hours = hours;
 
-
-                if (gpsWorked()) { // H gpsWorked επιστρέφει true αν το gps δούλεψε, αλλιώς false
+                // H gpsWorked επιστρέφει true αν το gps δούλεψε, αλλιώς false
+                if (gpsWorked()) {
                     // Εισαγωγή στη λίστα του συγκεκριμένου χρήστη της συγκεκριμένης μέρας
                     // της πληροφορίας περί απόστασης, χρόνου, id και κατάστασης μόλυνσης
                     llInsertEnd(&Users[day][userNum], user);
@@ -280,20 +286,35 @@ int main() {
 
         }
 
+        // Επανάληψη για όλους τους χρήστες
         for (int userNum = 0; userNum < usersNumber; userNum++) {
-            // Κάλεσμα repair
+            // Κάλεσμα repair για τη συμπλήρωση των χαμένων στιγμών λόγω του gps
             repair(Users[day][userNum]);
         }
 
+        // Κάλεσμα possible COVID-19 Infection
+
+        // Λογική μεταβλητή για την εμφάνιση του κατάλληλου μηνύματος στην περίπτωση που κανένας χρήστης δεν πρόκειται
+        // να έχει μολυνθεί
+        bool atLeast1UserMayBeSick = false;
+
+        // Επανάληψη για όλους τους χρήστες
         for (int userNum = 0; userNum < usersNumber; userNum++) {
-            // Κάλεσμα possible COVID-19 Infection
+            // Επειδή η κάθε λίστα περιέχει και τους υγιείς και τους ασθενείς πρέπει σε αυτό το στάδιο να γίνει
+            // διαχωρισμός και να καλείται η possible COVID-19 Infection μόνο για τους υγιείς
             bool userIsSick = llData(Users[day][userNum]).infected;
+
             if (!userIsSick) {
                 bool userMayBeSick = possibleCOVID_19Infection(Users[day][userNum], day, Users);
                 if (userMayBeSick) {
+                    atLeast1UserMayBeSick = true;
                     cout << "User " << userNum+1 << " was dangerously close to a COVID-19 patient and he may be sick" << endl;
                 }
             }
+        }
+
+        if (!atLeast1UserMayBeSick) {
+            cout << "Noone was dangerously close to a COVID-19 patient today" << endl;
         }
 
         int answer;
@@ -316,14 +337,16 @@ int main() {
 
     }
 
+    // Η παρακάτω επανάληψη εμφανίζει την πορεία όλων των χρηστών για κάθε μέρα. Χρησιμοποιήθηκε κυρίως για
+    // δοκιμαστικούς λόγους και γι αυτό βρίσκεται σε σχόλια
 
     /*for (int day = 0; day < daysNum; day++) {
-        cout<<endl<<"new day new life"<<endl;
         for (int userNum = 0; userNum < usersNumber; userNum++) {
             llDisplay(Users[day][userNum]);
         }
     }*/
 
+    return 0;
 }
 
 

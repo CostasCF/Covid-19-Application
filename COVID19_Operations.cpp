@@ -4,9 +4,14 @@
 
 bool possibleCOVID_19Infection(listPtr userTrajectory, int day, listPtr allUsers[][usersNumber]) {
 
+    // Επανάληψη για όλους τους χρήστες:
     for (int userID = 0; userID < usersNumber; userID++) {
+        // if για να αποφευχθεί η χρήση του userTrajectory όταν είναι null
         if (userTrajectory != nullptr) {
+
+            // Φιλτράρισμα των ασθενών χρηστών ώστε να συγκριθούν μόνο αυτοί με τον δοθέντα υγιή χρήστη
             bool userIsSick = llData(allUsers[day][userID]).infected;
+
             if (userIsSick) {
 
                 int seconds = 0;
@@ -37,27 +42,34 @@ bool possibleCOVID_19Infection(listPtr userTrajectory, int day, listPtr allUsers
                     int infectedUserX = llData(allUsers[day][userID]).x;
                     int infectedUserY = llData(allUsers[day][userID]).y;
 
+                    // Δημιουργεία νέου pointer για την παρακάτω επανάληψη ώστε να μην πειραχθεί ο
+                    listPtr healthyUserTrajectory = userTrajectory;
+
                     // Επανάληψη που κρατάει όσο ο μέγιστος χρόνος που μπορεί να περάσει, ώστε να μολυνθεί ένας υγιής
                     // χρήστης ο οποίος βρέθηκε εντός ακτίνας R από τις συντεταγμένες του ασθενή για τουλάχιστον Τ1 χρόνο
-                    listPtr healthyUserTrajectory = allUsers[day][userID];
-
                     for (int t2Seconds = 0; t2Seconds < T2; t2Seconds += 30) {
 
-                        // Αποθήκευση των συντεταγμένων του χρήστη
-                        int userX = llData(healthyUserTrajectory).x;
-                        int userY = llData(healthyUserTrajectory).y;
-
-                        double distance = sqrt(pow(infectedUserX - userX, 2) + pow(infectedUserY - userY, 2));
-
-                        if (distance <= R) {
-                            secondsStayed += 30;
-                            if (secondsStayed >= T1) {
-                                return true;
-                            }
-                        } else {
-                            secondsStayed = 0;
-                        }
                         if (healthyUserTrajectory != nullptr) {
+                            // Αποθήκευση των συντεταγμένων του χρήστη
+                            int userX = llData(healthyUserTrajectory).x;
+                            int userY = llData(healthyUserTrajectory).y;
+
+                            // Απόσταση μεταξυ του μολυσμένου χρήστη και του υγιούς
+                            double distance = sqrt(pow(infectedUserX - userX, 2) + pow(infectedUserY - userY, 2));
+
+                            // Αν η απόσταση είναι εντός της ακτίνας
+                            if (distance <= R) {
+                                // Αυξάνονται τα δευτερόλεπτα και εάν φτάσουν ή ξεπεράσουν την ελάχιστη διάρκεια
+                                // ο χρήστης ίσως έχει μολυνθεί
+                                secondsStayed += 30;
+                                if (secondsStayed >= T1) {
+                                    return true;
+                                }
+                            } else {
+                                secondsStayed = 0;
+                            }
+
+                            // Μετακίνηση στον επόμενο κόμβο της λίστας
                             healthyUserTrajectory = healthyUserTrajectory->next;
                         } else {
                             break;
@@ -65,6 +77,7 @@ bool possibleCOVID_19Infection(listPtr userTrajectory, int day, listPtr allUsers
                     }
 
                     seconds += 30;
+
                     if (userTrajectory != nullptr) {
                         userTrajectory = userTrajectory->next;
                     } else {

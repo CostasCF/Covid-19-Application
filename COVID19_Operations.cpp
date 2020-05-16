@@ -2,6 +2,7 @@
 
 #include "COVID19_Operations.h"
 
+// Επειδή δεν υπάρχει ξεχωριστή λίστα με ασθενείς περνάει όλος ο πίνακας και στη συνέχεια γίνεται ο διαχωρισμός
 bool possibleCOVID_19Infection(listPtr userTrajectory, int day, listPtr allUsers[][usersNumber]) {
 
     // Επανάληψη για όλους τους χρήστες:
@@ -182,26 +183,31 @@ int findCrowdedPlaces(int day, int startSeconds, int endSeconds, int squareRegio
 }
 
 
-
+// Επειδή υπάρχει πίνακας με τις μέρες και τους χρήστες δεν απαιτείται η μέρα σαν όρισμα
 void repair(listPtr userTrajectory)  {
-    // Μετατροπή ωρών, λεπτών και δευτερολέπτων σε δευτερόλεπτα
+    // Δημιουργεία δύο δεικτών στην αρχή της λίστας. Έναν για το τωρινό στοιχείο κι έναν για το προηγούμενο
     listPtr current;
     listPtr prev;
 
     prev = userTrajectory;
     current = prev;
+
+    // Όσο η λίστα έχει συνέχεια
     while (current != nullptr) {
         current = prev->next;
 
+        // if για την αποφυγή crash
         if (current != nullptr) {
+            // Βρίσκει τη χρονική διαφορά μεταξύ δύο διαδοχικών καταγεγραμμένων στιγμών
             int prevInstanceSeconds = llData(prev).seconds + llData(prev).minutes * 60
                                       + llData(prev).hours * 60 * 60;
             int instanceSeconds = llData(current).seconds + llData(current).minutes * 60
                                   + llData(current).hours * 60 * 60;
             int secondsDiff = instanceSeconds - prevInstanceSeconds;
 
+            // Αν η διαφορά είναι μεγαλύτερη του 30 τότε τουλάχιστον μία χρονική στιγμή δεν έχει καταγραφεί
             if (secondsDiff > 30) {
-
+                // Αποθήκευση των συντεταγμένων
                 int prevX = llData(prev).x;
                 int currentX = llData(current).x;
                 double meterCounterX = 0;
@@ -210,21 +216,28 @@ void repair(listPtr userTrajectory)  {
                 int currentY = llData(current).y;
                 double meterCounterY = 0;
 
+                // Δημιουργεία αντικειμένου user για να προστεθεί στο νέο κόμβο που θα δημιουργηθεί
                 User user{};
 
+                // Αρχικοποίηση στις συντεταγμένες του προηγούμενου κόμβου
                 user.x = prevX;
                 user.y = prevY;
 
+                // Το id και το infected παραμένουν σταθερά
                 user.id = llData(prev).id;
                 user.infected = llData(prev).infected;
 
-                // Βλέπε β' Λυκείου μαθηματικά κατεύθυνσης απόσταση 2 σημείων
+                // Χρήση μαθηματικού τύπου της απόστασης δύο σημείων
                 double realDistance = sqrt(pow((llData(current).x - llData(prev).x), 2)
                                            + pow((llData(current).y - llData(prev).y), 2)) * gridDistance;
-                double userSpeed = realDistance / 30;
+
+                double userSpeed = realDistance / 30;   // Εύρεση της ταχύτητας του χρήστη διαιρώντας την απόσταση με τη
+                                                        // χρονική απόσταση
+
                 // Μετατροπή km/h σε μέτρα ανά 30 δευτερόλεπτα
                 double userSpeedM_30sec = userSpeed*1000/60/2;
 
+                // Η επανάληψη αυτή υπάρχει στην περίπτωση που λείπουν περισσότεροι από έναν κόμβοι
                 for (int seconds = 30; seconds < secondsDiff; seconds += 30) {
 
                     user.seconds = llData(prev).seconds + 30;
@@ -243,6 +256,7 @@ void repair(listPtr userTrajectory)  {
                         user.minutes = 0;
                     }
 
+                    // Παρόμοια διαδικασία με αυτή στη main για την κίνηση του χρήστη προς τη σωστή κατεύθυνση
                     if (prevX < currentX) {
                         meterCounterX += userSpeedM_30sec;
                         while (meterCounterX >= gridDistance) {
@@ -269,12 +283,15 @@ void repair(listPtr userTrajectory)  {
                         }
                     }
 
+                    // Δημιουργεία νέου κόμβου μετά τον προηγούμενο
                     llInsertAfter(prev, user);
 
+                    // Αυξάνεται το prev στην περίπτωση η διαφορά των δευτερολέπτων είναι μεγαλύτερη του 60
                     prev = prev->next;
                 }
             }
         }
+        // prev = current ώστε να προχωρήσει το prev στον επόμενο κόμβο και στη συνέχεια το current να προχωρήσει και αυτό
         prev = current;
 
     }

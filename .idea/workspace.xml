@@ -29,16 +29,15 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68dab85e-dbf2-4108-a3dc-2391f0de344f" name="Default Changelist" comment="(+) Added possibleCOVID_19Infection&#10;* Fixed more bugs">
+    <list default="true" id="68dab85e-dbf2-4108-a3dc-2391f0de344f" name="Default Changelist" comment="(+) Added more comments">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/COVID19_Operations.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/COVID19_Operations.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/COVID19_Operations.h" beforeDir="false" afterPath="$PROJECT_DIR$/COVID19_Operations.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LinkedList.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LinkedList.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Covid_19_Application.dir/COVID19_Operations.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Covid_19_Application.dir/COVID19_Operations.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Covid_19_Application.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Covid_19_Application.dir/CXX.includecache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Covid_19_Application.dir/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Covid_19_Application.dir/main.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Covid_19_Application.dir/objects.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Covid_19_Application.dir/objects.a" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Covid_19_Application.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Covid_19_Application.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +103,21 @@
       <option name="project" value="LOCAL" />
       <updated>1589653473103</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="(+) Added more comments">
+      <created>1589655253501</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1589655253501</updated>
+    </task>
+    <task id="LOCAL-00005" summary="(+) Added more comments">
+      <created>1589657303503</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1589657303503</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -126,44 +139,45 @@
     <MESSAGE value="Pushing destroyed version" />
     <MESSAGE value="Pushing working version" />
     <MESSAGE value="(+) Added possibleCOVID_19Infection&#10;* Fixed more bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="(+) Added possibleCOVID_19Infection&#10;* Fixed more bugs" />
+    <MESSAGE value="(+) Added more comments" />
+    <option name="LAST_COMMIT_MESSAGE" value="(+) Added more comments" />
   </component>
   <component name="WindowStateProjectService">
     <state width="447" height="466" key="DebuggerActiveHint" timestamp="1589645031427">
       <screen x="0" y="0" width="1360" height="768" />
     </state>
     <state width="447" height="466" key="DebuggerActiveHint/0.0.1360.768@0.0.1360.768" timestamp="1589645031427" />
-    <state width="1317" height="192" key="GridCell.Tab.0.bottom" timestamp="1589653902917">
+    <state width="1317" height="238" key="GridCell.Tab.0.bottom" timestamp="1589657327714">
       <screen x="0" y="0" width="1360" height="768" />
     </state>
-    <state width="1317" height="192" key="GridCell.Tab.0.bottom/0.0.1360.768@0.0.1360.768" timestamp="1589653902917" />
-    <state width="1317" height="192" key="GridCell.Tab.0.center" timestamp="1589653902917">
+    <state width="1317" height="238" key="GridCell.Tab.0.bottom/0.0.1360.768@0.0.1360.768" timestamp="1589657327714" />
+    <state width="1317" height="238" key="GridCell.Tab.0.center" timestamp="1589657327714">
       <screen x="0" y="0" width="1360" height="768" />
     </state>
-    <state width="1317" height="192" key="GridCell.Tab.0.center/0.0.1360.768@0.0.1360.768" timestamp="1589653902917" />
-    <state width="1317" height="192" key="GridCell.Tab.0.left" timestamp="1589653902917">
+    <state width="1317" height="238" key="GridCell.Tab.0.center/0.0.1360.768@0.0.1360.768" timestamp="1589657327714" />
+    <state width="1317" height="238" key="GridCell.Tab.0.left" timestamp="1589657327714">
       <screen x="0" y="0" width="1360" height="768" />
     </state>
-    <state width="1317" height="192" key="GridCell.Tab.0.left/0.0.1360.768@0.0.1360.768" timestamp="1589653902917" />
-    <state width="1317" height="192" key="GridCell.Tab.0.right" timestamp="1589653902917">
+    <state width="1317" height="238" key="GridCell.Tab.0.left/0.0.1360.768@0.0.1360.768" timestamp="1589657327714" />
+    <state width="1317" height="238" key="GridCell.Tab.0.right" timestamp="1589657327714">
       <screen x="0" y="0" width="1360" height="768" />
     </state>
-    <state width="1317" height="192" key="GridCell.Tab.0.right/0.0.1360.768@0.0.1360.768" timestamp="1589653902917" />
-    <state width="1317" height="238" key="GridCell.Tab.1.bottom" timestamp="1589645660449">
+    <state width="1317" height="238" key="GridCell.Tab.0.right/0.0.1360.768@0.0.1360.768" timestamp="1589657327714" />
+    <state width="1317" height="238" key="GridCell.Tab.1.bottom" timestamp="1589657327714">
       <screen x="0" y="0" width="1360" height="768" />
     </state>
-    <state width="1317" height="238" key="GridCell.Tab.1.bottom/0.0.1360.768@0.0.1360.768" timestamp="1589645660449" />
-    <state width="1317" height="238" key="GridCell.Tab.1.center" timestamp="1589645660448">
+    <state width="1317" height="238" key="GridCell.Tab.1.bottom/0.0.1360.768@0.0.1360.768" timestamp="1589657327714" />
+    <state width="1317" height="238" key="GridCell.Tab.1.center" timestamp="1589657327714">
       <screen x="0" y="0" width="1360" height="768" />
     </state>
-    <state width="1317" height="238" key="GridCell.Tab.1.center/0.0.1360.768@0.0.1360.768" timestamp="1589645660448" />
-    <state width="1317" height="238" key="GridCell.Tab.1.left" timestamp="1589645660448">
+    <state width="1317" height="238" key="GridCell.Tab.1.center/0.0.1360.768@0.0.1360.768" timestamp="1589657327714" />
+    <state width="1317" height="238" key="GridCell.Tab.1.left" timestamp="1589657327714">
       <screen x="0" y="0" width="1360" height="768" />
     </state>
-    <state width="1317" height="238" key="GridCell.Tab.1.left/0.0.1360.768@0.0.1360.768" timestamp="1589645660448" />
-    <state width="1317" height="238" key="GridCell.Tab.1.right" timestamp="1589645660449">
+    <state width="1317" height="238" key="GridCell.Tab.1.left/0.0.1360.768@0.0.1360.768" timestamp="1589657327714" />
+    <state width="1317" height="238" key="GridCell.Tab.1.right" timestamp="1589657327714">
       <screen x="0" y="0" width="1360" height="768" />
     </state>
-    <state width="1317" height="238" key="GridCell.Tab.1.right/0.0.1360.768@0.0.1360.768" timestamp="1589645660449" />
+    <state width="1317" height="238" key="GridCell.Tab.1.right/0.0.1360.768@0.0.1360.768" timestamp="1589657327714" />
   </component>
 </project>

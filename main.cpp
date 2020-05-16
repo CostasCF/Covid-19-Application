@@ -147,6 +147,9 @@ int main() {
 
     // Επανάληψη για τις μέρες
     for (int day = 0; day < daysNum; day++) {
+
+        cout << "--------------------- DAY " << day + 1 << " ---------------------" << endl << endl;
+
         for (int userNum = 0; userNum < usersNumber; userNum++) {
 
             // Δημιουργία αντικειμένου User
@@ -264,17 +267,19 @@ int main() {
             repair(Users[day][userNum]);
         }
 
-        /*for (int userNum = 0; userNum < usersNumber; userNum++) {
+        for (int userNum = 0; userNum < usersNumber; userNum++) {
             // Κάλεσμα possible COVID-19 Infection
             bool userIsSick = llData(Users[day][userNum]).infected;
             if (!userIsSick) {
-                //possibleCOVID_19Infection(Users[day][userNum], day, *Users);
-                cout << "nvm" << endl;
+                bool userMayBeSick = possibleCOVID_19Infection(Users[day][userNum], day, Users);
+                if (userMayBeSick) {
+                    cout << "User " << userNum+1 << " was dangerously close to a COVID-19 patient and he may be sick" << endl;
+                }
             }
-        }*/
+        }
 
         int answer;
-        cout << "Do you want to check for crowded places? Press 1 for yes, or 0 for no" << endl;
+        cout << endl << "Do you want to check for crowded places? Press 1 for yes, or 0 for no" << endl;
         cin >> answer;
 
         if (answer == 1) {
@@ -287,9 +292,7 @@ int main() {
             int minimumStayDuration = rand() % 1800 + 180; // Τυχαία τιμή από 3 λεπτά μέχρι μισή ώρα
 
             cout << "Based on the provided data there were " <<
-            findCrowdedPlaces(day, startTime, endTime, squareRegionOfInterest, minimumStayDuration, Users) << " people" << endl;
-
-            //findCrowdedPlaces(day, 3600, 7200, 30, 300, Users)
+            findCrowdedPlaces(day, startTime, endTime, squareRegionOfInterest, minimumStayDuration, Users) << " people in the given area" << endl << endl;
 
         }
 

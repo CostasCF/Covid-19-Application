@@ -2,68 +2,78 @@
 
 #include "COVID19_Operations.h"
 
-bool possibleCOVID_19Infection(listPtr userTrajectory, int day, listPtr *allUsers[]) {
+bool possibleCOVID_19Infection(listPtr userTrajectory, int day, listPtr allUsers[][usersNumber]) {
+
     for (int userID = 0; userID < usersNumber; userID++) {
-        bool userIsSick = llData(allUsers[day][userID]).infected;
-        if (userIsSick) {
+        if (userTrajectory != nullptr) {
+            bool userIsSick = llData(allUsers[day][userID]).infected;
+            if (userIsSick) {
 
-            int seconds = 0;
-            int minutes = 0;
-            int hours = 0;
+                int seconds = 0;
+                int minutes = 0;
+                int hours = 0;
 
-            int R = rand() % 5 + 1; // random τιμή από 1 μέχρι 5
-            int T1 = rand() % 10800 + 1; // random τιμή από 1 δευτερόλεπτο μέχρι 3 ώρες
-            int T2 = rand() % 21600 + 3600; // random τιμή από 1 μέχρι 6 ώρες
+                int R = rand() % 4 + 2; // random τιμή από 2 μέχρι 6 για την ακτίνα
+                int T1 = rand() % 1770 + 30; // random τιμή από 30 δευτερόλεπτα μέχρι μισή ώρα
+                int T2 = rand() % 21600 + 1800; // random τιμή από 30 λεπτά μέχρι 6 ώρες
 
-            int secondsStayed = 0;
+                int secondsStayed = 0;
 
-            for (int daySeconds = 0; daySeconds < 86400; daySeconds += 30) {
+                for (int daySeconds = 0; daySeconds < 86400; daySeconds += 30) {
 
-                // Μετατροπή δευτερολέπτων σε λεπτά
-                if (seconds == 60) {
-                    minutes++;
-                    seconds = 0;
-                }
-
-                // Μετατροπή λεπτών σε ώρες
-                if (minutes == 60) {
-                    hours++;
-                    minutes = 0;
-                }
-
-                // Αποθήκευση των συντεταγμένων του μολυσμένου χρήστη για σύγκριση με τις συντεταγμένες των υγιών χρηστών
-                int infectedUserX = llData(allUsers[day][userID]).x;
-                int infectedUserY = llData(allUsers[day][userID]).y;
-
-                // Επανάληψη που κρατάει όσο ο μέγιστος χρόνος που μπορεί να περάσει, ώστε να μολυνθεί ένας υγιής
-                // χρήστης ο οποίος βρέθηκε εντός ακτίνας R από τις συντεταγμένες του ασθενή για τουλάχιστον Τ1 χρόνο
-                for (int t2Seconds = 0; t2Seconds < T2; t2Seconds += 30) {
-
-                    listPtr healthyUserTrajectory = allUsers[day][userID];
-
-                    // Αποθήκευση των συντεταγμένων του χρήστη
-                    int userX = llData(healthyUserTrajectory).x;
-                    int userY = llData(healthyUserTrajectory).y;
-
-                    double distance = sqrt(pow(infectedUserX - userX, 2) + pow(infectedUserY - userY, 2));
-
-                    if (distance <= R) {
-                        secondsStayed += 30;
-                        if (secondsStayed >= T1) {
-                            cout << "Ο χρήστης " << llData(healthyUserTrajectory).id << " ίσως έχει μολυνθεί." << endl;
-                            return true;
-                        }
-                    } else {
-                        secondsStayed = 0;
+                    // Μετατροπή δευτερολέπτων σε λεπτά
+                    if (seconds == 60) {
+                        minutes++;
+                        seconds = 0;
                     }
 
-                    healthyUserTrajectory = healthyUserTrajectory->next;
+                    // Μετατροπή λεπτών σε ώρες
+                    if (minutes == 60) {
+                        hours++;
+                        minutes = 0;
+                    }
+
+                    // Αποθήκευση των συντεταγμένων του μολυσμένου χρήστη για σύγκριση με τις συντεταγμένες των υγιών χρηστών
+                    int infectedUserX = llData(allUsers[day][userID]).x;
+                    int infectedUserY = llData(allUsers[day][userID]).y;
+
+                    // Επανάληψη που κρατάει όσο ο μέγιστος χρόνος που μπορεί να περάσει, ώστε να μολυνθεί ένας υγιής
+                    // χρήστης ο οποίος βρέθηκε εντός ακτίνας R από τις συντεταγμένες του ασθενή για τουλάχιστον Τ1 χρόνο
+                    listPtr healthyUserTrajectory = allUsers[day][userID];
+
+                    for (int t2Seconds = 0; t2Seconds < T2; t2Seconds += 30) {
+
+                        // Αποθήκευση των συντεταγμένων του χρήστη
+                        int userX = llData(healthyUserTrajectory).x;
+                        int userY = llData(healthyUserTrajectory).y;
+
+                        double distance = sqrt(pow(infectedUserX - userX, 2) + pow(infectedUserY - userY, 2));
+
+                        if (distance <= R) {
+                            secondsStayed += 30;
+                            if (secondsStayed >= T1) {
+                                return true;
+                            }
+                        } else {
+                            secondsStayed = 0;
+                        }
+                        if (healthyUserTrajectory != nullptr) {
+                            healthyUserTrajectory = healthyUserTrajectory->next;
+                        } else {
+                            break;
+                        }
+                    }
+
+                    seconds += 30;
+                    if (userTrajectory != nullptr) {
+                        userTrajectory = userTrajectory->next;
+                    } else {
+                        break;
+                    }
                 }
-
-                seconds += 30;
-
-                userTrajectory = userTrajectory->next;
             }
+        } else {
+            break;
         }
     }
     return false;
@@ -76,14 +86,14 @@ int findCrowdedPlaces(int day, int startSeconds, int endSeconds, int squareRegio
     int userCounter = 0;
 
     for (int userNum = 0; userNum < usersNumber; userNum++) {
-        listPtr userTrajectory;
+
+        listPtr userTrajectory = users[day][userNum]; // Pointer στην αρχή της λίστας (τροχιάς) του userNum χρήστη για την day μέρα
 
         // If για την αποφυγή SIGSEGV (Segmentation fault)
         if (userTrajectory != nullptr) {
-            userTrajectory = users[day][userNum]; // Pointer στην αρχή της λίστας (τροχιάς) του userNum χρήστη για την day μέρα
 
             int timeInSeconds;  // Χρησιμοποιείται για να μετατραπεί η μορφή της ώρας απο ώρες, λέπτα και δευτερόλεπτα
-            // σε δευτερόλεπτα
+                                // σε δευτερόλεπτα
 
             // Συντεταγμένες του χρήστη
             int userX;

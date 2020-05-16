@@ -14,7 +14,7 @@ const int usersNumber = 25;
 // Ορισμός ημερών
 const int daysNum = 7;
 
-bool possibleCOVID_19Infection(listPtr userTrajectory, int day, listPtr allUsers[], int usersNumber);
+bool possibleCOVID_19Infection(listPtr userTrajectory, int day, listPtr allUsers[][usersNumber]);
 void repair(listPtr userTrajectory);
 int findCrowdedPlaces(int day, int startSeconds, int endSeconds, int squareRegionOfInterest, int minimumStayDuration, listPtr users[][usersNumber]);
 void summarizeTrajectory();

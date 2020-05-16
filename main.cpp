@@ -20,6 +20,7 @@ bool gpsWorked() {
     return random != 1;
 }
 
+// Οι παρακάτω συναρτήσεις επιστρέφουν μία τυχαία τιμή μέσα στο πλέγμα
 int getRandomX(int dimension) {
     return rand() % dimension;
 }
@@ -28,10 +29,16 @@ int getRandomY(int dimension) {
     return rand() % dimension;
 }
 
+// Αυτή η συνάρτηση επιστρέφει μία ταχύτητα από 3 έως 6 χιλιόμετρα άνα ώρα
 int getRandomSpeed() {
     return rand() % 3 + 3; // Χιλιόμετρα την ώρα
 }
 
+// Οι επόμενες 4 συναρτήσεις χρησιμοποιούνται στην κίνηση του χρήστη και συγκεκριμένα για την αυξομείωση των
+// συντεταγμένων ανάλογα με τη θέση στην οποία βρίσκεται ο χρήστης και σε αυτή που θέλει να πάει
+
+// Στην περίπτωση που το x στο οποίο θέλει να πάει είναι μεγαλύτερο από αυτό στο οποίο βρίσκεται πρέπει το χ του χρήστη
+// να αυξηθεί
 void increaseX(int &x, int desiredX, double &meterCounterX, double userSpeedM_30sec, int gridDistance) {
     meterCounterX += userSpeedM_30sec;
     while (meterCounterX >= gridDistance && x < desiredX) {
@@ -40,6 +47,8 @@ void increaseX(int &x, int desiredX, double &meterCounterX, double userSpeedM_30
     }
 }
 
+// Στην περίπτωση που το x στο οποίο θέλει να πάει είναι μικρότερο από αυτό στο οποίο βρίσκεται πρέπει το χ του χρήστη
+// να μειωθεί
 void decreaseX(int &x, int desiredX, double &meterCounterX, double userSpeedM_30sec, int gridDistance) {
     meterCounterX += userSpeedM_30sec;
     while (meterCounterX >= gridDistance && x > desiredX) {
@@ -48,6 +57,8 @@ void decreaseX(int &x, int desiredX, double &meterCounterX, double userSpeedM_30
     }
 }
 
+// Στην περίπτωση που το Υ στο οποίο θέλει να πάει είναι μεγαλύτερο από αυτό στο οποίο βρίσκεται πρέπει το Υ του χρήστη
+// να αυξηθεί
 void increaseY(int &y, int desiredY, double &meterCounterY, double userSpeedM_30sec, int gridDistance) {
     meterCounterY += userSpeedM_30sec;
     while (meterCounterY >= gridDistance && y < desiredY) {
@@ -56,6 +67,8 @@ void increaseY(int &y, int desiredY, double &meterCounterY, double userSpeedM_30
     }
 }
 
+// Στην περίπτωση που το Υ στο οποίο θέλει να πάει είναι μικρότερο από αυτό στο οποίο βρίσκεται πρέπει το Υ του χρήστη
+// να μειωθεί
 void decreaseY(int &y, int desiredY, double &meterCounterY, double userSpeedM_30sec, int gridDistance) {
     meterCounterY += userSpeedM_30sec;
     while (meterCounterY >= gridDistance && y > desiredY) {
@@ -70,7 +83,7 @@ void decreaseY(int &y, int desiredY, double &meterCounterY, double userSpeedM_30
 bool moveUser(int specifier, int &x, int &y, int desiredX, int desiredY, double &meterCounterX,
               double &meterCounterY, double userSpeedM_30sec, int gridDistance) {
     switch (specifier) {
-        case 1:
+        case 1: // Αν το x και το y του χρήστη είναι μικρότερα από το x και το y στα οποία θέλει να πάει
 
             if (x < desiredX) {
                 increaseX(x, desiredX ,meterCounterX, userSpeedM_30sec, gridDistance);
@@ -83,7 +96,8 @@ bool moveUser(int specifier, int &x, int &y, int desiredX, int desiredY, double 
             }
             break;
 
-        case 2:
+        case 2: // Αν το χ του χρήστη είναι μικρότερο από το χ που θέλει να πάει,
+                // αλλά το y του μεγαλύτερο από το y που θέλει να πάει
 
             if (x < desiredX) {
                 increaseX(x, desiredX, meterCounterX, userSpeedM_30sec, gridDistance);
@@ -95,7 +109,8 @@ bool moveUser(int specifier, int &x, int &y, int desiredX, int desiredY, double 
                 return false;
             }
             break;
-        case 3:
+        case 3: // Αν το χ του χρήστη είναι μεγαλύτερο από το χ που θέλει να πάει,
+                // αλλά το y του μικρότερο από το y που θέλει να πάει
 
             if (x > desiredX) {
                 decreaseX(x, desiredX ,meterCounterX, userSpeedM_30sec, gridDistance);
@@ -108,7 +123,7 @@ bool moveUser(int specifier, int &x, int &y, int desiredX, int desiredY, double 
             }
             break;
 
-        case 4:
+        case 4: // Αν το x και το y του χρήστη είναι μεγαλύτερα από το x και το y στα οποία θέλει να πάει
 
             if (x > desiredX) {
                 decreaseX(x, desiredX ,meterCounterX, userSpeedM_30sec, gridDistance);
@@ -132,16 +147,14 @@ int main() {
     // srand ώστε να μην παράγονται οι ίδιοι αριθμοί κάθε φορά που τρέχει το πρόγραμμα
     srand(time(nullptr));
 
-    // Δήλωση ενός δισδιάστατου πίνακα του τύπου listPtr που κάθε γραμμή αντιστοιχεί σε μία μέρα
-    // και περιέχει μία απλά συνδεδεμένη λίστα για την τροχιά του κάθε χρήστη εκείνη τη μέρα
+    // Δήλωση ενός δισδιάστατου πίνακα του τύπου listPtr (δηλαδή του πρώτου δείκτη κόμβου μιας απλά συνδεδεμένης λίστας που κάθε
+    // γραμμή αντιστοιχεί σε μία μέρα και περιέχει μία απλά συνδεδεμένη λίστα για την τροχιά του κάθε χρήστη εκείνη τη μέρα
     listPtr Users[daysNum][usersNumber];
 
     for (int day = 0; day < daysNum; day++) {
         for (int userNum = 0; userNum < usersNumber; userNum++) {
-
-            // Αρχικοποίηση όλων των συνδεδεμένων λίστών με την τιμή null
+            // Αρχικοποίηση όλων των συνδεδεμένων λίστών (όπου κάθε μία από αυτές περιέχει την τροχιά ενός χρήστη) με την τιμή null
             llInit(&Users[day][userNum]);
-
         }
     }
 
@@ -163,12 +176,16 @@ int main() {
             int desiredX = user.x;
             int desiredY = user.y;
 
-            // Meter counter
+            // Ανάμεσα σε κάθε κελί του πλέγματος υπάρχει μία απόσταση gridDistance(δηλωμένο στο COVID19_Operations.h).
+            // Συνεπώς για την κίνηση των χρηστών χρειάζεται μία μεταβλητή (για το χ και y αντίστοιχα) η οποία
+            // αν ξεπερνάει το gridDistance να προχωράει ο χρήστης
+
             double meterCounterX = 0;
             double meterCounterY = 0;
+
             // Ταχύτητα του χρήστη
             int userSpeedKm_h; // σε χιλιόμετρα ανά ώρα
-            double userSpeedM_30sec; // Σε μέτρα ανά 30 δευτερόλεπτα
+            double userSpeedM_30sec; // Σε μέτρα ανά 30 δευτερόλεπτα (ώστε να μπορούμε να μετρήσουμε ευκολότερα την απόσταση)
 
             // Ορισμός μεταβλητής που υποδεικνύει εάν ο χρήστης βρίσκεται σε κίνηση ή όχι
             bool userMoving = false;
@@ -177,7 +194,8 @@ int main() {
             // Ταυτότητα
             user.id = userNum + 1;
             // Κατάστασης μόλυνσης
-            user.setInfectionStatus();
+            user.setInfectionStatus();  // Στο πρόγραμμα δεν υπάρχει λίστα με COVID-19 patients, το αν είναι μολυσμένος ή
+                                        // όχι ένας χρήστης καθορίζεται από τη μεταβλητή infected του struct User
 
             // Χρήση μεταβλητών για δευτερόλεπτα, λεπτά και ώρες, ώστε ο χρόνος να
             // εμφανίζεται με πιο όμορφο τρόπο

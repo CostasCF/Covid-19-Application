@@ -15,7 +15,7 @@ bool possibleCOVID_19Infection(listPtr userTrajectory, int day, listPtr allUsers
 
                 int R = rand() % 4 + 2; // random τιμή από 2 μέχρι 6 για την ακτίνα
                 int T1 = rand() % 1770 + 30; // random τιμή από 30 δευτερόλεπτα μέχρι μισή ώρα
-                int T2 = rand() % 21600 + 1800; // random τιμή από 30 λεπτά μέχρι 6 ώρες
+                int T2 = rand() % 21600 + 3600; // random τιμή από 1 ώρα μέχρι 6 ώρες
 
                 int secondsStayed = 0;
 

@@ -7,7 +7,7 @@
 
 using namespace std;
 
-bool possibleCOVID_19Infection(listPtr userTrajectory, listPtr allUsers[], int usersNumber);
+bool possibleCOVID_19Infection(listPtr userTrajectory, int day, listPtr allUsers[], int usersNumber);
 void repair(listPtr userTrajectory, int gridDistance);
 int FIND_CROWDED_PLACES(listPtr pNode, int i, int i1);
 
@@ -288,7 +288,7 @@ int main() {
             // Κάλεσμα possible COVID-19 Infection
             bool userIsSick = llData(Users[day][userNum]).infected;
             if (!userIsSick) {
-                //possibleCOVID_19Infection(UsersNumber, Users[day][userNum], Users);
+                possibleCOVID_19Infection(Users[day][userNum], day, *Users, UsersNumber);
             }
         }
 
@@ -308,10 +308,61 @@ int main() {
 
 }
 
-bool possibleCOVID_19Infection(listPtr userTrajectory, listPtr allUsers[], int usersNumber) {
-    for (int i = 0; i < usersNumber; i++) {
-        //bool userIsSick = llData(allUsers[i][]);
+bool possibleCOVID_19Infection(listPtr userTrajectory, int day, listPtr *allUsers[], int usersNumber) {
+    for (int userID = 0; userID < usersNumber; userID++) {
+        bool userIsSick = llData(allUsers[day][userID]).infected;
+        if (userIsSick) {
+
+            int seconds = 0;
+            int minutes = 0;
+            int hours = 0;
+
+            int R = rand() % 5 + 1; // random τιμή από 1 μέχρι 5
+            int T1 = rand() % 10800 + 1; // random τιμή από 1 δευτερόλεπτο μέχρι 3 ώρες
+            int T2 = rand() % 21600 + 3600; // random τιμή από 1 μέχρι 6 ώρες
+
+            bool stayedAtLeastT1Seconds = false;
+            int secondsStayed = 0;
+
+            for (int daySeconds = 0; daySeconds < 86400; daySeconds += 30) {
+
+                // Μετατροπή δευτερολέπτων σε λεπτά
+                if (seconds == 60) {
+                    minutes++;
+                    seconds = 0;
+                }
+
+                // Μετατροπή λεπτών σε ώρες
+                if (minutes == 60) {
+                    hours++;
+                    minutes = 0;
+                }
+
+                int userX = llData(userTrajectory).x;
+                int userY = llData(userTrajectory).y;
+
+                int infectedUserX = llData(allUsers[day][userID]).x;
+                int infectedUserY = llData(allUsers[day][userID]).y;
+
+                double distance = sqrt(pow(infectedUserX - userX, 2) + pow(infectedUserY - userY, 2));
+
+                if (distance <= R) {
+                    secondsStayed += 30;
+                } else {
+                    secondsStayed = 0;
+                }
+
+                if (secondsStayed >= T1) {
+                    stayedAtLeastT1Seconds = true;
+                }
+
+                seconds += 30;
+
+                userTrajectory = userTrajectory->next;
+            }
+        }
     }
+    return false;
 }
 
 
